@@ -15,6 +15,7 @@ namespace MyHouse
         public Form1()
         {
             InitializeComponent();
+            ппп
         }
     }
 }
