@@ -15,5 +15,11 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(59, 160, 232);
+            button2.BackColor = Color.FromArgb(59, 160, 232);
+        }
     }
 }
