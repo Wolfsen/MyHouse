@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRealtyClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRealtyClient.Designer.cs">
+      <DependentUpon>AddRealtyClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="RealtyClient.Designer.cs">
       <DependentUpon>RealtyClient.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddRealtyClient.resx">
+      <DependentUpon>AddRealtyClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
     </EmbeddedResource>
