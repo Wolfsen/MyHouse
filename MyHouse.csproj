@@ -74,6 +74,12 @@
     <Compile Include="Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="DealClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DealClient.Designer.cs">
+      <DependentUpon>DealClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DealClient.resx">
+      <DependentUpon>DealClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -162,6 +171,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database2.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\doprovojd.png" />
     <None Include="Resources\house.png" />
     <None Include="Resources\client.png" />
     <None Include="Resources\Key1.png" />
