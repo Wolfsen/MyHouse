@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace MyHouse
 {
@@ -16,6 +17,10 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        SqlConnection connection = new SqlConnection(connectionString);
+        DataTable dt;
 
         private void Authorization_Load(object sender, EventArgs e)
         {
@@ -37,6 +42,9 @@ namespace MyHouse
             dataGridView2.Rows.Add();
             dataGridView2.Rows[1].Height = 30;
             dataGridView2[0, 1].Value = "Пароль";
+            dataGridView2[0,1].Style.Format= "";
+
+           
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -70,26 +78,42 @@ namespace MyHouse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dataGridView2[1, 0].Value.ToString() == "р")
+            if (dataGridView2[1, 0].Value.ToString() != null && dataGridView2[1, 1].Value.ToString() != null)
             {
-                MenuRealtor mc = new MenuRealtor();
-                mc.Show();
-                this.Close();
+                string sql = "Select * From Users Where email='" + dataGridView2[1, 0].Value.ToString() + "' and password='" + dataGridView2[1, 1].Value.ToString() + "'";
+                SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+                connection.Open();
+                dt = new DataTable();
+                dataadapter.Fill(dt);
+                connection.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0][1].ToString() == "1")
+                    {
+                        MenuClient mc = new MenuClient();
+                        mc.Show();
+                        this.Close();
+                    }
+                    else
+                if (dt.Rows[0][1].ToString() == "2")
+                    {
+                        MenuRealtor mc = new MenuRealtor();
+                        mc.Show();
+                        this.Close();
+                    }
+                    else
+                if (dt.Rows[0][1].ToString() == "3")
+                    {
+                        ManagerMenu mc = new ManagerMenu();
+                        mc.Show();
+                        this.Close();
+                    }
+                }
+                else
+                    MessageBox.Show("Проверьте введенные данные", "Ошибка");
             }
             else
-                if (dataGridView2[1, 0].Value.ToString() == "к")
-            {
-                MenuClient mc = new MenuClient();
-                mc.Show();
-                this.Close();
-            }
-            else
-                if (dataGridView2[1, 0].Value.ToString() == "м")
-            {
-                ManagerMenu mc = new ManagerMenu();
-                mc.Show();
-                this.Close();
-            }
+                MessageBox.Show("Попробуй еще раз!", "Ошибка");
         }
     }
 }
