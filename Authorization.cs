@@ -70,9 +70,26 @@ namespace MyHouse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MenuRealtor mc = new MenuRealtor();
-            mc.Show();
-            this.Close();
+            if (dataGridView2[1, 0].Value.ToString() == "р")
+            {
+                MenuRealtor mc = new MenuRealtor();
+                mc.Show();
+                this.Close();
+            }
+            else
+                if (dataGridView2[1, 0].Value.ToString() == "к")
+            {
+                MenuClient mc = new MenuClient();
+                mc.Show();
+                this.Close();
+            }
+            else
+                if (dataGridView2[1, 0].Value.ToString() == "м")
+            {
+                ManagerMenu mc = new ManagerMenu();
+                mc.Show();
+                this.Close();
+            }
         }
     }
 }
