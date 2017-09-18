@@ -63,6 +63,7 @@
             this.butDeal.TabIndex = 11;
             this.butDeal.Text = "Заключенные сделки";
             this.butDeal.UseVisualStyleBackColor = false;
+            this.butDeal.Click += new System.EventHandler(this.butDeal_Click);
             // 
             // butExit
             // 
@@ -77,6 +78,7 @@
             this.butExit.TabIndex = 10;
             this.butExit.Text = "Выход из учетной записи";
             this.butExit.UseVisualStyleBackColor = false;
+            this.butExit.Click += new System.EventHandler(this.butExit_Click);
             // 
             // butRealty
             // 
@@ -91,6 +93,7 @@
             this.butRealty.TabIndex = 9;
             this.butRealty.Text = "Недвижимость";
             this.butRealty.UseVisualStyleBackColor = false;
+            this.butRealty.Click += new System.EventHandler(this.butRealty_Click);
             // 
             // butClients
             // 
@@ -105,6 +108,7 @@
             this.butClients.TabIndex = 8;
             this.butClients.Text = "Клиенты";
             this.butClients.UseVisualStyleBackColor = false;
+            this.butClients.Click += new System.EventHandler(this.butClients_Click);
             // 
             // pictureBox1
             // 
@@ -131,6 +135,7 @@
             this.Controls.Add(this.butClients);
             this.Controls.Add(this.label1);
             this.Name = "MenuRealtor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuRealtor";
             this.Load += new System.EventHandler(this.MenuRealtor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

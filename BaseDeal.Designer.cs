@@ -41,15 +41,15 @@
             this.butBack = new System.Windows.Forms.Button();
             this.butPrint = new System.Windows.Forms.Button();
             this.dgvDeal = new System.Windows.Forms.DataGridView();
-            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeal)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +90,7 @@
             this.butDeal.TabIndex = 28;
             this.butDeal.Text = "Заключить сделку";
             this.butDeal.UseVisualStyleBackColor = false;
+            this.butDeal.Click += new System.EventHandler(this.butDeal_Click);
             // 
             // butFilter
             // 
@@ -118,6 +119,7 @@
             this.butBack.TabIndex = 30;
             this.butBack.Text = "Назад";
             this.butBack.UseVisualStyleBackColor = false;
+            this.butBack.Click += new System.EventHandler(this.butBack_Click);
             // 
             // butPrint
             // 
@@ -157,44 +159,6 @@
             this.dgvDeal.RowHeadersVisible = false;
             this.dgvDeal.Size = new System.Drawing.Size(664, 230);
             this.dgvDeal.TabIndex = 32;
-            // 
-            // dateTimePickerTo
-            // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(486, 130);
-            this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(111, 20);
-            this.dateTimePickerTo.TabIndex = 38;
-            // 
-            // dateTimePickerFrom
-            // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(374, 130);
-            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
-            this.dateTimePickerFrom.Size = new System.Drawing.Size(111, 20);
-            this.dateTimePickerFrom.TabIndex = 37;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(160)))), ((int)(((byte)(232)))));
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(374, 114);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 19);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "Дата от";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(160)))), ((int)(((byte)(232)))));
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(486, 114);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 19);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Дата до";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Column1
             // 
@@ -236,6 +200,44 @@
             this.Column5.HeaderText = "Клиент";
             this.Column5.Name = "Column5";
             // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.Location = new System.Drawing.Point(486, 130);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(111, 20);
+            this.dateTimePickerTo.TabIndex = 38;
+            // 
+            // dateTimePickerFrom
+            // 
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(374, 130);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(111, 20);
+            this.dateTimePickerFrom.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(160)))), ((int)(((byte)(232)))));
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(374, 114);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 19);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "Дата от";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(160)))), ((int)(((byte)(232)))));
+            this.label3.Font = new System.Drawing.Font("Calibri", 12F);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(486, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(111, 19);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Дата до";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // BaseDeal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -255,6 +257,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Name = "BaseDeal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BaseDeal";
             this.Load += new System.EventHandler(this.BaseDeal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -70,7 +70,7 @@ namespace MyHouse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MenuClient mc = new MenuClient();
+            MenuRealtor mc = new MenuRealtor();
             mc.Show();
             this.Close();
         }

@@ -182,12 +182,13 @@
             this.butBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butBack.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.butBack.ForeColor = System.Drawing.Color.White;
-            this.butBack.Location = new System.Drawing.Point(536, 300);
+            this.butBack.Location = new System.Drawing.Point(530, 292);
             this.butBack.Name = "butBack";
-            this.butBack.Size = new System.Drawing.Size(289, 36);
+            this.butBack.Size = new System.Drawing.Size(294, 36);
             this.butBack.TabIndex = 45;
             this.butBack.Text = "Назад";
             this.butBack.UseVisualStyleBackColor = false;
+            this.butBack.Click += new System.EventHandler(this.butBack_Click);
             // 
             // butAdd
             // 
@@ -196,7 +197,7 @@
             this.butAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.butAdd.ForeColor = System.Drawing.Color.White;
-            this.butAdd.Location = new System.Drawing.Point(236, 300);
+            this.butAdd.Location = new System.Drawing.Point(230, 292);
             this.butAdd.Name = "butAdd";
             this.butAdd.Size = new System.Drawing.Size(294, 36);
             this.butAdd.TabIndex = 46;
@@ -224,6 +225,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Name = "AddDeal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddDeal";
             this.Load += new System.EventHandler(this.AddDeal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

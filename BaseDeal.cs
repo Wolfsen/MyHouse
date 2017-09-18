@@ -25,7 +25,7 @@ namespace MyHouse
             butPrint.FlatAppearance.BorderSize = 0;
             butBack.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
-            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butDeal.Width, butDeal.Height), 10));
+            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butFilter.Width, butFilter.Height), 10));
             butFilter.Region = Button_Region;
             Region Button_Region2 = new Region(RoundedRect(new Rectangle(0, 0, butPrint.Width, butPrint.Height), 10));
             butPrint.Region = Button_Region2;
@@ -52,6 +52,19 @@ namespace MyHouse
 
             path.CloseFigure();
             return path;
+        }
+
+        private void butBack_Click(object sender, EventArgs e)
+        {
+            MenuRealtor mr = new MenuRealtor();
+            mr.Show();
+            this.Close();
+        }
+
+        private void butDeal_Click(object sender, EventArgs e)
+        {
+            AddDeal ad = new AddDeal();
+            ad.ShowDialog();
         }
     }
     }

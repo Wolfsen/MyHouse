@@ -61,5 +61,12 @@ namespace MyHouse
             AddEmployee ae = new AddEmployee();
             ae.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ManagerMenu mm = new ManagerMenu();
+            mm.Show();
+            this.Close();
+        }
     }
 }

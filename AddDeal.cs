@@ -47,6 +47,11 @@ namespace MyHouse
             path.CloseFigure();
             return path;
         }
+
+        private void butBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
     }
 

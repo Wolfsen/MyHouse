@@ -53,5 +53,33 @@ namespace MyHouse
             path.CloseFigure();
             return path;
         }
+
+        private void butExit_Click(object sender, EventArgs e)
+        {
+            MainMenu mm = new MainMenu();
+            mm.Show();
+            this.Close();
+        }
+
+        private void butClients_Click(object sender, EventArgs e)
+        {
+            BaseClient bc = new BaseClient();
+            bc.Show();
+            this.Hide();
+        }
+
+        private void butRealty_Click(object sender, EventArgs e)
+        {
+            BaseRealty br = new BaseRealty();
+            br.Show();
+            this.Hide();
+        }
+
+        private void butDeal_Click(object sender, EventArgs e)
+        {
+            BaseDeal bd = new BaseDeal();
+            bd.Show();
+            this.Hide();
+        }
     }
 }
