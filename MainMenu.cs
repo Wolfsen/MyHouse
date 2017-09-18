@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K1FLG14\SQLEXPRESS;Initial Catalog=Database2;Integrated Security=True");
+        SqlCommand cmd = new SqlCommand();
+        string sql;
         private void MainMenu_Load(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(59, 160, 232);
@@ -52,6 +55,17 @@ namespace MyHouse
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height),10));
             button1.Region = Button_Region;
             button2.Region = Button_Region;
+            FillDtgv();
+        }
+
+        private void FillDtgv()
+        {
+            sql = "Select * from Realty";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dataadapter.Fill(ds);
+            connection.Close();
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
