@@ -9,13 +9,11 @@ using System.Windows.Forms;
 
 namespace MyHouse
 {
-    public partial class Authorization : Form
+    public partial class ProfileClient : Form
     {
-        public Authorization()
+        public ProfileClient()
         {
             InitializeComponent();
         }
-
-      
     }
 }

@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRealtyClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRealtyClient.Designer.cs">
+      <DependentUpon>AddRealtyClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,12 @@
     </Compile>
     <Compile Include="Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DealClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DealClient.Designer.cs">
+      <DependentUpon>DealClient.cs</DependentUpon>
     </Compile>
     <Compile Include="ListRealtors.cs">
       <SubType>Form</SubType>
@@ -86,6 +98,18 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuClient.Designer.cs">
+      <DependentUpon>MenuClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileClient.Designer.cs">
+      <DependentUpon>ProfileClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManagerMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,17 +118,35 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealtyClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RealtyClient.Designer.cs">
+      <DependentUpon>RealtyClient.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddRealtyClient.resx">
+      <DependentUpon>AddRealtyClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DealClient.resx">
+      <DependentUpon>DealClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListRealtors.resx">
       <DependentUpon>ListRealtors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuClient.resx">
+      <DependentUpon>MenuClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileClient.resx">
+      <DependentUpon>ProfileClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerMenu.resx">
       <DependentUpon>ManagerMenu.cs</DependentUpon>
@@ -119,6 +161,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RealtyClient.resx">
+      <DependentUpon>RealtyClient.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,6 +207,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database2.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\doprovojd.png" />
+    <None Include="Resources\house.png" />
+    <None Include="Resources\client.png" />
+    <None Include="Resources\Key1.png" />
     <None Include="Resources\Фон.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
