@@ -10,28 +10,32 @@ using System.Windows.Forms;
 
 namespace MyHouse
 {
-    public partial class ListRealtors : Form
+    public partial class Rating : Form
     {
-        public ListRealtors()
+        public Rating()
         {
             InitializeComponent();
         }
 
-        private void ListRealtors_Load(object sender, EventArgs e)
+        private void Rating_Load(object sender, EventArgs e)
         {
+            dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             button1.BackColor = Color.FromArgb(59, 160, 232);
             button2.BackColor = Color.FromArgb(59, 160, 232);
             button3.BackColor = Color.FromArgb(59, 160, 232);
+            button4.BackColor = Color.FromArgb(59, 160, 232);
             button1.FlatAppearance.BorderSize = 0;
             button2.FlatAppearance.BorderSize = 0;
             button3.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height), 10));
             button1.Region = Button_Region;
             button2.Region = Button_Region;
+            Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button3.Width, button3.Height), 10));
             button3.Region = Button_Region;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
-            dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
+            button4.Region = Button_Region;
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -56,10 +60,11 @@ namespace MyHouse
             return path;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            AddEmployee ae = new AddEmployee();
-            ae.ShowDialog();
+            ManagerMenu mm = new ManagerMenu();
+            mm.Show();
+            this.Close();
         }
     }
 }

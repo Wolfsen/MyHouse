@@ -118,6 +118,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rating.Designer.cs">
+      <DependentUpon>Rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="RealtyClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Rating.resx">
+      <DependentUpon>Rating.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RealtyClient.resx">
       <DependentUpon>RealtyClient.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +216,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database2.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\gr.png" />
+    <None Include="Resources\work.png" />
+    <None Include="Resources\usergroup.png" />
     <None Include="Resources\doprovojd.png" />
     <None Include="Resources\house.png" />
     <None Include="Resources\client.png" />
