@@ -27,6 +27,7 @@ namespace MyHouse
         int idDeal=0;
         private void AddDeal_Load(object sender, EventArgs e)
         {
+
             butAdd.FlatAppearance.BorderSize = 0;
             butBack.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
