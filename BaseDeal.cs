@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 
 namespace MyHouse
 {
@@ -21,6 +21,9 @@ namespace MyHouse
         const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
         SqlConnection _fConDb = new SqlConnection(_myConn);
         SqlCommand cmd = new SqlCommand();
+        DataTable dt;
+        SqlDataAdapter da;
+        BindingSource bs;
         private void BaseDeal_Load(object sender, EventArgs e)
         {
             butDeal.FlatAppearance.BorderSize = 0;
@@ -34,8 +37,10 @@ namespace MyHouse
             butPrint.Region = Button_Region2;
             butDeal.Region = Button_Region2;
             butBack.Region = Button_Region2;
+            InitDateDeal();
+
         }
-         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
+        public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
         {
             var diameter = radius * 2;
             var sz = new Size(diameter, diameter);
@@ -69,6 +74,37 @@ namespace MyHouse
             AddDeal ad = new AddDeal();
             ad.ShowDialog();
         }
+        DataView dv;
+        public void InitDateDeal()
+        {
+
+            string sql = "SELECT descriptionType, description, price, dataOfDeal, FirstName FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            _fConDb.Close();
+            dgvDeal.DataSource = dt;
+            dv = new DataView(dt);
+        }
+        private void butFilter_Click(object sender, EventArgs e)
+        {
+            dv.RowFilter = string.Format("dataOfDeal BETWEEN '" + dateTimePickerFrom.Value.Date + "' AND '" + dateTimePickerTo.Value.Date + "'");
+            dgvDeal.DataSource = dv;
+        }
+
+        private void butPrint_Click(object sender, EventArgs e)
+        {
+            var pd = new PrintDocument();
+            pd.PrintPage += (s, q) =>
+            {
+                var bmp = new Bitmap(dgvDeal.Width, dgvDeal.Height);
+                dgvDeal.DrawToBitmap(bmp, dgvDeal.ClientRectangle);
+                q.Graphics.DrawImage(bmp, new Point(100, 100));
+            };
+            pd.Print();
+        }
+
     }
-    }
+}
 
