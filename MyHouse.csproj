@@ -110,12 +110,6 @@
     <Compile Include="BaseRealty.Designer.cs">
       <DependentUpon>BaseRealty.cs</DependentUpon>
     </Compile>
-    <Compile Include="DealClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DealClient.Designer.cs">
-      <DependentUpon>DealClient.cs</DependentUpon>
-    </Compile>
     <Compile Include="ListRealtors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,9 +183,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BaseRealty.resx">
       <DependentUpon>BaseRealty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DealClient.resx">
-      <DependentUpon>DealClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListRealtors.resx">
       <DependentUpon>ListRealtors.cs</DependentUpon>

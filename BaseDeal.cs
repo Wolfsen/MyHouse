@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Data.SqlClient;
 
 namespace MyHouse
 {
@@ -17,7 +18,9 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-
+        const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        SqlConnection _fConDb = new SqlConnection(_myConn);
+        SqlCommand cmd = new SqlCommand();
         private void BaseDeal_Load(object sender, EventArgs e)
         {
             butDeal.FlatAppearance.BorderSize = 0;
