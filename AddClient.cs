@@ -123,14 +123,16 @@ namespace MyHouse
                     cmd.Clone();
                     connection.Close();
 
-                    cmd = new SqlCommand();
-                    cmd.Connection = connection;
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1.Connection = connection;
                     connection.Open();
-                    cmd.CommandText = "Insert into Users (email,roleid,password) values('" + dataGridView1[1, 0].Value.ToString() + "','" +"1"+ "','" + dataGridView2[1, 0].Value.ToString() + "')";
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
+                    cmd1.CommandText = "Insert into Users (email,roleid,password) values('" + dataGridView1[1, 0].Value.ToString() + "','" +"1"+ "','" + dataGridView2[1, 0].Value.ToString() + "')";
+                    cmd1.ExecuteNonQuery();
+                    cmd1.Clone();
                     connection.Close();
-                                                                              
+
+                    BaseClient bc = new BaseClient();
+                    bc.LoadBaseClient();                                                 
                     this.Close();
                     
                 }
