@@ -94,6 +94,11 @@ namespace MyHouse
                 MessageBox.Show("Не корректный ввод цены", "Ошибка");
             }
         }
+
+        private void butAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
