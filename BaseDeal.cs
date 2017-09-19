@@ -32,6 +32,7 @@ namespace MyHouse
 
         private void BaseDeal_Load(object sender, EventArgs e)
         {
+            dgvDeal.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             butDeal.FlatAppearance.BorderSize = 0;
             butFilter.FlatAppearance.BorderSize = 0;
             butPrint.FlatAppearance.BorderSize = 0;
