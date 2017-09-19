@@ -87,7 +87,9 @@ namespace MyHouse
         }
         private void butFilter_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT descriptionType, description, price, dateOfDeal, FirstName FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) Where dateOfDeal BETWEEN '" + dateTimePickerFrom.Value.Date + "' AND '" + dateTimePickerTo.Value.Date + "'";
+            string dateInIsoFormat1 = dateTimePickerFrom.Value.ToString("yyyyMMdd HH:mm:ss");
+            string dateInIsoFormat2 = dateTimePickerTo.Value.ToString("yyyyMMdd HH:mm:ss");
+            string sql = "SELECT descriptionType, description, price, dateOfDeal, FirstName FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) Where dateOfDeal BETWEEN '" + dateInIsoFormat1 + "' AND '" + dateInIsoFormat2 + "'";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();

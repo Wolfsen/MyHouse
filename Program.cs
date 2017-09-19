@@ -16,7 +16,7 @@ namespace MyHouse
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BaseDeal());
+            Application.Run(new BaseRealty());
         }
     }
 }
