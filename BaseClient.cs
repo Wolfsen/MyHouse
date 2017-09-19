@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Drawing.Printing;
 
 namespace MyHouse
 {
@@ -118,6 +119,18 @@ namespace MyHouse
             //Вызываем нашу созданную эксельку. 
             ExcelApp.Visible = true;
             ExcelApp.UserControl = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var pd = new PrintDocument();
+            pd.PrintPage += (s, q) =>
+            {
+                var bmp = new Bitmap(dataGridView1.Width, dataGridView1.Height);
+                dataGridView1.DrawToBitmap(bmp, dataGridView1.ClientRectangle);
+                q.Graphics.DrawImage(bmp, new Point(100, 100));
+            };
+            pd.Print();
         }
     }
 }

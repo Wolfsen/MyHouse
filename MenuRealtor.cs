@@ -78,7 +78,9 @@ namespace MyHouse
         private void butDeal_Click(object sender, EventArgs e)
         {
             BaseDeal bd = new BaseDeal();
+            bd.SetEmail(Usersmail.Text);
             bd.Show();
+
             this.Hide();
         }
     }
