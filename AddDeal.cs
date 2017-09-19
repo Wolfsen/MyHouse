@@ -33,6 +33,7 @@ namespace MyHouse
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butAdd.Width, butAdd.Height), 10));
             butAdd.Region = Button_Region;
             butBack.Region = Button_Region;
+            InitDate();
         }
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
         {
