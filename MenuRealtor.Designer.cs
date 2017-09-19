@@ -35,6 +35,7 @@
             this.butRealty = new System.Windows.Forms.Button();
             this.butClients = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Usersmail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +122,15 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // Usersmail
+            // 
+            this.Usersmail.AutoSize = true;
+            this.Usersmail.Location = new System.Drawing.Point(472, 18);
+            this.Usersmail.Name = "Usersmail";
+            this.Usersmail.Size = new System.Drawing.Size(0, 13);
+            this.Usersmail.TabIndex = 15;
+            this.Usersmail.Visible = false;
+            // 
             // MenuRealtor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -128,6 +138,7 @@
             this.BackgroundImage = global::MyHouse.Properties.Resources.Фон;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(714, 325);
+            this.Controls.Add(this.Usersmail);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.butDeal);
             this.Controls.Add(this.butExit);
@@ -152,5 +163,6 @@
         private System.Windows.Forms.Button butRealty;
         private System.Windows.Forms.Button butClients;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label Usersmail;
     }
 }

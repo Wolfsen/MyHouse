@@ -7,6 +7,9 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace MyHouse
 {
@@ -16,6 +19,11 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+        SqlConnection connection = new SqlConnection(connectionString);
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        SqlCommand cmd = new SqlCommand();
+        string sql;
+        DataTable dt;
 
         private void BaseClient_Load(object sender, EventArgs e)
         {
@@ -35,6 +43,9 @@ namespace MyHouse
             button4.Region = Button_Region;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
+
+            LoadBaseClient();
+
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -70,6 +81,43 @@ namespace MyHouse
         {
             AddClient ac = new AddClient();
             ac.ShowDialog();
+        }
+
+        private void LoadBaseClient()
+        {
+            sql = "Select * from Clients";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            connection.Open();
+            dt = new DataTable();
+            dataadapter.Fill(dt);
+            connection.Close();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+                dataGridView1.Rows.Add(dt.Rows[i][2]+" "+ dt.Rows[i][3]+" "+ dt.Rows[i][4], dt.Rows[i][1], dt.Rows[i][6], dt.Rows[i][7]);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            ExcelApp.Columns.ColumnWidth = 15;
+
+            ExcelApp.Cells[1, 1] = "ФИО";
+            ExcelApp.Cells[1, 2] = "E-mail";
+            ExcelApp.Cells[1, 3] = "Телефон";
+            ExcelApp.Cells[1, 4] = "Адрес";
+           
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.RowCount; j++)
+                {
+                    ExcelApp.Cells[j + 2, i + 1] = (dataGridView1[i, j].Value).ToString();
+                }
+            }
+            //Вызываем нашу созданную эксельку. 
+            ExcelApp.Visible = true;
+            ExcelApp.UserControl = true;
         }
     }
 }
