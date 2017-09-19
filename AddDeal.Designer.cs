@@ -145,6 +145,7 @@
             this.cbRealty.Name = "cbRealty";
             this.cbRealty.Size = new System.Drawing.Size(148, 27);
             this.cbRealty.TabIndex = 41;
+            this.cbRealty.SelectedValueChanged += new System.EventHandler(this.cbRealty_SelectedValueChanged);
             // 
             // cbDeal
             // 
@@ -156,6 +157,7 @@
             this.cbDeal.Name = "cbDeal";
             this.cbDeal.Size = new System.Drawing.Size(148, 27);
             this.cbDeal.TabIndex = 42;
+            this.cbDeal.SelectedValueChanged += new System.EventHandler(this.cbDeal_SelectedValueChanged);
             // 
             // tbPrice
             // 

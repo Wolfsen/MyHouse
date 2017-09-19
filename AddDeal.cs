@@ -23,7 +23,7 @@ namespace MyHouse
         DataTable dt;
         SqlDataAdapter da;
         BindingSource bs;
-        int idRealty=0;
+        int idTypeRealty=0;
         int idDeal=0;
         private void AddDeal_Load(object sender, EventArgs e)
         {
@@ -98,7 +98,48 @@ namespace MyHouse
 
         private void butAdd_Click(object sender, EventArgs e)
         {
+            if (tbPrice.Text != "")
+            {
+                cmd.Connection = _fConDb;
+                _fConDb.Open();
+               // cmd.CommandText = "Insert into Deal (FIO ,Passport,WhomGiven,WhenGiven,Address,IdPosition) values('" + tbFIO.Text + "','" + tbSeria.Text + "','" + tbWhom.Text + "','" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "','" + tbAddress.Text + "','" + IdPos + "')";
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Ошибка:\r\n" + exc.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
+                finally
+                {
+                    _fConDb.Close();
+                }
+                MessageBox.Show("Сделка успешно заключена!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                butAdd.Enabled = false;
+                this.Owner.Show();
+                this.Close();
+            }
+            else MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private void cbRealty_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cbRealty.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                idTypeRealty = Convert.ToInt32(cbRealty.SelectedValue);
+            }
+        }
+
+        private void cbDeal_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cbDeal.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                idDeal = Convert.ToInt32(cbDeal.SelectedValue);
+            }
         }
     }
 }
