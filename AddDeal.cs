@@ -27,6 +27,7 @@ namespace MyHouse
         int idDeal=0;
         private void AddDeal_Load(object sender, EventArgs e)
         {
+
             butAdd.FlatAppearance.BorderSize = 0;
             butBack.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
@@ -106,11 +107,7 @@ namespace MyHouse
         }
         private void tbPrice_TextChanged(object sender, EventArgs e)
         {
-         //   if (Convert.ToInt32(tbPrice.Text) <= 0)
-          //  {
-          //      tbPrice.Clear();
-      //          MessageBox.Show("Не корректный ввод цены", "Ошибка");
-         //   }
+           
         }
 
         private int GetIdRealtor()
@@ -149,28 +146,36 @@ namespace MyHouse
         {
             if (tbPrice.Text != "")
             {
-                int idrealtor = GetIdRealtor();
-                cmd.Connection = _fConDb;
-                _fConDb.Open();
-                cmd.CommandText = "Insert into Deal (Id_realty,Id_realtor,Id_services,dateOfDeal) values('" + idTypeRealty + "','" + idrealtor + "','" + idDeal + "','" + dateTimePickerTo.Value.ToString("yyyy-MM-dd") + "')";
-                try
+                if (Convert.ToInt32(tbPrice.Text) <= 0)
                 {
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
-               }
-                catch (Exception exc)
+                    tbPrice.Clear();
+                    MessageBox.Show("Не корректный ввод цены", "Ошибка");
+                }
+                else
                 {
-                    MessageBox.Show("Ошибка:\r\n" + exc.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int idrealtor = GetIdRealtor();
+                    cmd.Connection = _fConDb;
+                    _fConDb.Open();
+                    cmd.CommandText = "Insert into Deal (Id_realty,Id_realtor,Id_services,dateOfDeal) values('" + idTypeRealty + "','" + idrealtor + "','" + idDeal + "','" + dateTimePickerTo.Value.ToString("yyyy-MM-dd") + "')";
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        cmd.Clone();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Ошибка:\r\n" + exc.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                    }
+                    finally
+                    {
+                        _fConDb.Close();
+                    }
+                    UppdateRealty();
+                    MessageBox.Show("Сделка успешно заключена!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    butAdd.Enabled = false;
+                    this.Close();
                 }
-              finally
-                {
-                    _fConDb.Close();
-                }
-                UppdateRealty();
-                MessageBox.Show("Сделка успешно заключена!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                butAdd.Enabled = false;
-                this.Close();
             }
             else MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -31,6 +31,7 @@ namespace MyHouse
             dataGridView2.Columns[0].DefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView2.Columns[0].DefaultCellStyle.Font = new Font("Calibri", 8, FontStyle.Regular);
             dataGridView2.Columns[1].DefaultCellStyle.BackColor = Color.FromArgb(162, 136, 234);
+            dataGridView1.RowsDefaultCellStyle.BackColor = Color.FromArgb(162, 136, 234);
             dataGridView1.BackgroundColor= Color.FromArgb(162, 136, 234);
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             textBox1.BackColor = Color.FromArgb(162, 136, 234);
