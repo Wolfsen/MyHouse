@@ -118,7 +118,7 @@ namespace MyHouse
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = connection;
                     connection.Open();
-                    cmd.CommandText = "Insert into Clients (email,FirstName,LastName,Patronymic,DateOfBirth,Telephone,Address) values('" + dataGridView1[1, 0].Value.ToString() + "','" + dataGridView1[1, 1].Value.ToString() + "','" + dataGridView1[1, 2].Value.ToString() + "','" + dataGridView1[1, 3].Value.ToString() + "','" + dataGridView1[1, 4].Value.ToString() + "','" + dataGridView1[1, 5].Value.ToString() + "','" + dataGridView1[1, 6].Value.ToString() + "')";
+                    cmd.CommandText = "Insert into Clients (email,FirstName,LastName,Patronymic,DateOfBirth,Telephone,Address) values('" + dataGridView1[1, 0].Value.ToString() + "',N'" + dataGridView1[1, 1].Value.ToString() + "',N'" + dataGridView1[1, 2].Value.ToString() + "',N'" + dataGridView1[1, 3].Value.ToString() + "','" + dataGridView1[1, 4].Value.ToString() + "',N'" + dataGridView1[1, 5].Value.ToString() + "',N'" + dataGridView1[1, 6].Value.ToString() + "')";
                     cmd.ExecuteNonQuery();
                     cmd.Clone();
                     connection.Close();

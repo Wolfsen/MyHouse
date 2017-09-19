@@ -132,5 +132,10 @@ namespace MyHouse
             };
             pd.Print();
         }
+
+        private void BaseClient_Activated(object sender, EventArgs e)
+        {
+            LoadBaseClient();
+        }
     }
 }
