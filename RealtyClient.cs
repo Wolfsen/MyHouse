@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace MyHouse
 {
@@ -16,6 +17,10 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        SqlConnection connection = new SqlConnection(connectionString);
+        DataTable dt;
+
 
         private void RealtyClient_Load(object sender, EventArgs e)
         {
@@ -35,6 +40,10 @@ namespace MyHouse
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
             dataGridView2.Rows.Add();
+
+          
+
+          CBInfo();
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -70,6 +79,45 @@ namespace MyHouse
         {
             AddRealtyClient arc = new AddRealtyClient();
             arc.ShowDialog();
+        }
+
+        private void CBInfo()
+        {
+            ///вид недвижимости
+            string sql = "Select descriptionType From Property_Type";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            connection.Open();
+            dt = new DataTable();
+            dataadapter.Fill(dt);
+            connection.Close();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                (dataGridView2.Rows[0].Cells[0] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
+            }
+            ////тип объекта
+            sql = "Select descriptionHouse From House_Type";
+            dataadapter = new SqlDataAdapter(sql, connection);
+            connection.Open();
+            dt = new DataTable();
+            dataadapter.Fill(dt);
+            connection.Close();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                (dataGridView2.Rows[0].Cells[1] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
+            }
+
+            ////вид объекта
+            sql = "Select descriptionObject From Object";
+            dataadapter = new SqlDataAdapter(sql, connection);
+            connection.Open();
+            dt = new DataTable();
+            dataadapter.Fill(dt);
+            connection.Close();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                (dataGridView2.Rows[0].Cells[2] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
+            }
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace MyHouse
 {
@@ -16,6 +17,10 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        SqlConnection connection = new SqlConnection(connectionString);
+        DataTable dt;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,6 +49,23 @@ namespace MyHouse
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
             dataGridView2.Rows.Add();
+
+            string sql = "Select Id_PropertyType From Property_Type";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            connection.Open();
+            dt = new DataTable();
+            dataadapter.Fill(dt);
+            connection.Close();
+
+
+
+            DataGridViewComboBoxCell comboCell = (DataGridViewComboBoxCell)dataGridView2.Rows[0].Cells[3];
+
+            for(int i=0;i<dt.Columns.Count;i++)
+            {
+                comboCell.Items.Add(dt.Rows[i][0].ToString());
+            }
+            
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)

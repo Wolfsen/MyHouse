@@ -64,7 +64,7 @@ namespace MyHouse
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DealClient dc = new DealClient();
+            BaseDeal dc = new BaseDeal();
             dc.Show();
             this.Hide();
         }
