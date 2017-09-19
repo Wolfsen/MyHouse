@@ -35,12 +35,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cbRealty = new System.Windows.Forms.ComboBox();
+            this.cbDeal = new System.Windows.Forms.ComboBox();
+            this.tbPrice = new System.Windows.Forms.TextBox();
             this.butBack = new System.Windows.Forms.Button();
             this.butAdd = new System.Windows.Forms.Button();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,45 +135,37 @@
             this.label6.Text = "Дата";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // cbRealty
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ItemHeight = 19;
-            this.comboBox1.Location = new System.Drawing.Point(236, 229);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(148, 27);
-            this.comboBox1.TabIndex = 41;
+            this.cbRealty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
+            this.cbRealty.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbRealty.FormattingEnabled = true;
+            this.cbRealty.ItemHeight = 19;
+            this.cbRealty.Location = new System.Drawing.Point(236, 229);
+            this.cbRealty.Name = "cbRealty";
+            this.cbRealty.Size = new System.Drawing.Size(148, 27);
+            this.cbRealty.TabIndex = 41;
             // 
-            // comboBox2
+            // cbDeal
             // 
-            this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.ItemHeight = 19;
-            this.comboBox2.Location = new System.Drawing.Point(383, 229);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(148, 27);
-            this.comboBox2.TabIndex = 42;
+            this.cbDeal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
+            this.cbDeal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbDeal.FormattingEnabled = true;
+            this.cbDeal.ItemHeight = 19;
+            this.cbDeal.Location = new System.Drawing.Point(383, 229);
+            this.cbDeal.Name = "cbDeal";
+            this.cbDeal.Size = new System.Drawing.Size(148, 27);
+            this.cbDeal.TabIndex = 42;
             // 
-            // textBox1
+            // tbPrice
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(530, 229);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(148, 27);
-            this.textBox1.TabIndex = 43;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
-            this.textBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(677, 229);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(148, 27);
-            this.textBox2.TabIndex = 44;
+            this.tbPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
+            this.tbPrice.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPrice.Location = new System.Drawing.Point(530, 229);
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.Size = new System.Drawing.Size(148, 27);
+            this.tbPrice.TabIndex = 43;
+            this.tbPrice.TextChanged += new System.EventHandler(this.tbPrice_TextChanged);
             // 
             // butBack
             // 
@@ -204,6 +196,17 @@
             this.butAdd.Text = "Заключить";
             this.butAdd.UseVisualStyleBackColor = false;
             // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(136)))), ((int)(((byte)(234)))));
+            this.dateTimePickerTo.CustomFormat = "dd.MM.yyyy";
+            this.dateTimePickerTo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePickerTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerTo.Location = new System.Drawing.Point(677, 229);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(147, 27);
+            this.dateTimePickerTo.TabIndex = 47;
+            // 
             // AddDeal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,12 +214,12 @@
             this.BackgroundImage = global::MyHouse.Properties.Resources.Фон;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(847, 410);
+            this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.butAdd);
             this.Controls.Add(this.butBack);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tbPrice);
+            this.Controls.Add(this.cbDeal);
+            this.Controls.Add(this.cbRealty);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -243,11 +246,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox cbRealty;
+        private System.Windows.Forms.ComboBox cbDeal;
+        private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Button butBack;
         private System.Windows.Forms.Button butAdd;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
     }
 }

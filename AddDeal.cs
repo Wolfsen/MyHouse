@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Data.SqlClient;
 
 namespace MyHouse
 {
@@ -16,7 +17,14 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-
+        const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        SqlConnection _fConDb = new SqlConnection(_myConn);
+        SqlCommand cmd = new SqlCommand();
+        DataTable dt;
+        SqlDataAdapter da;
+        BindingSource bs;
+        int idRealty=0;
+        int idDeal=0;
         private void AddDeal_Load(object sender, EventArgs e)
         {
             butAdd.FlatAppearance.BorderSize = 0;
@@ -26,7 +34,7 @@ namespace MyHouse
             butAdd.Region = Button_Region;
             butBack.Region = Button_Region;
         }
-         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
+        public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
         {
             var diameter = radius * 2;
             var sz = new Size(diameter, diameter);
@@ -52,6 +60,40 @@ namespace MyHouse
         {
             this.Close();
         }
+        public void InitDate()
+        {
+            string sql = "SELECT * FROM Property_Type";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            bs = new BindingSource();
+            bs.DataSource = dt;
+            cbRealty.DataSource = bs;
+            cbRealty.DisplayMember = "descriptionType";
+            cbRealty.ValueMember = "Id_PropertyType";
+            _fConDb.Close();
+
+            sql = "SELECT * FROM Services";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            bs = new BindingSource();
+            bs.DataSource = dt;
+            cbDeal.DataSource = bs;
+            cbDeal.DisplayMember = "description";
+            cbDeal.ValueMember = "Id_Services";
+            _fConDb.Close();
+        }
+        private void tbPrice_TextChanged(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(tbPrice.Text) <= 0)
+            {
+                tbPrice.Clear();
+                MessageBox.Show("Не корректный ввод цены", "Ошибка");
+            }
+        }
     }
-    }
+}
 
