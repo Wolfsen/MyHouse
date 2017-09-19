@@ -83,7 +83,7 @@ namespace MyHouse
             ac.ShowDialog();
         }
 
-        private void LoadBaseClient()
+        public void LoadBaseClient()
         {
             sql = "Select * from Clients";
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
