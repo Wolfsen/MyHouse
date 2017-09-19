@@ -26,6 +26,7 @@ namespace MyHouse
         {
             button1.BackColor = Color.FromArgb(59, 160, 232);
             button2.BackColor = Color.FromArgb(59, 160, 232);
+            button3.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView2.Columns[0].DefaultCellStyle.WrapMode=DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView2.Columns[0].DefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
@@ -50,13 +51,14 @@ namespace MyHouse
             dataGridView2.Rows.Add();
             dataGridView2.Rows[4].Height = 40;
             dataGridView2[0, 4].Value = "Этаж";
-           // dataGridView2.RowsDefaultCellStyle.BackColor = Color.FromArgb(162, 136, 234);
             button1.FlatAppearance.BorderSize = 0;
             button2.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height),10));
             button1.Region = Button_Region;
             button2.Region = Button_Region;
+            button3.Region = Button_Region;
             FillDtgvFromBase();
             FillPropertyTypeFromBase();
             FillObjectTypeFromBase();
@@ -264,6 +266,15 @@ namespace MyHouse
             dataadapter.Fill(ds);
             connection.Close();
             FillDgv(ds);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                (dataGridView2[1, i] as DataGridViewComboBoxCell).Value = null;
+            }
+            textBox1.Text = "";
         }
     }
 }
