@@ -21,7 +21,6 @@ namespace MyHouse
         static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
         SqlCommand cmd = new SqlCommand();
         string sql;
-        bool first;
         private void MainMenu_Load(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(59, 160, 232);
@@ -110,7 +109,7 @@ namespace MyHouse
 
         private void FillDtgvFromBase()
         {
-            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType)";
+            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType) where status=''";
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             DataTable ds = new DataTable();
             connection.Open();
@@ -192,73 +191,42 @@ namespace MyHouse
 
         private void button2_Click(object sender, EventArgs e)
         {
-            first = false;
-            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType)";
+
+            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType) where status=''";
 
             if ((dataGridView2[1, 0] as DataGridViewComboBoxCell).Value!=null)
             {
-                sql += " where descriptionType=N'"+ (dataGridView2[1, 0] as DataGridViewComboBoxCell).Value.ToString()+ "'";
-                first = true;
+                sql += " and descriptionType=N'"+ (dataGridView2[1, 0] as DataGridViewComboBoxCell).Value.ToString()+ "'";
             }
             if ((dataGridView2[1, 1] as DataGridViewComboBoxCell).Value != null)
             {
-                if(first)
-                {
+               
                     sql += " and descriptionObject=N'" + (dataGridView2[1, 1] as DataGridViewComboBoxCell).Value.ToString() + "'";
-                }
-                else
-                {
-                    sql += " where descriptionObject=N'" + (dataGridView2[1, 1] as DataGridViewComboBoxCell).Value.ToString() + "'";
-                    first = true;
-                }
+               
             }
             if ((dataGridView2[1, 2] as DataGridViewComboBoxCell).Value != null)
             {
-                if (first)
-                {
+                
                     sql += " and descriptionHouse=N'" + (dataGridView2[1, 2] as DataGridViewComboBoxCell).Value.ToString() + "'";
-                }
-                else
-                {
-                    sql += " where descriptionHouse=N'" + (dataGridView2[1, 2] as DataGridViewComboBoxCell).Value.ToString() + "'";
-                    first = true;
-                }
+              
             }
             if ((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value != null)
             {
-                if (first)
-                {
+              
                     sql += " and numberOfRooms=N'" + Convert.ToInt32((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value) + "'";
-                }
-                else
-                {
-                    sql += " where numberOfRooms=N'" + Convert.ToInt32((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value) + "'";
-                    first = true;
-                }
+               
             }
             if ((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value != null)
             {
-                if (first)
-                {
+               
                     sql += " and floor=N'" + Convert.ToInt32((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value) + "'";
-                }
-                else
-                {
-                    sql += " where floor=N'" + Convert.ToInt32((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value) + "'";
-                    first = true;
-                }
+               
             }
             if (textBox1.Text != "")
             {
-                if (first)
-                {
+                
                     sql += " and price <='" + Convert.ToInt32(textBox1.Text) + "'";
-                }
-                else
-                {
-                    sql += " where price <='" + Convert.ToInt32(textBox1.Text) + "'";
-                    first = true;
-                }
+               
             }
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             DataTable ds = new DataTable();

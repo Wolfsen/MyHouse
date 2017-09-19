@@ -195,6 +195,7 @@
             this.butAdd.TabIndex = 46;
             this.butAdd.Text = "Заключить";
             this.butAdd.UseVisualStyleBackColor = false;
+            this.butAdd.Click += new System.EventHandler(this.butAdd_Click);
             // 
             // dateTimePickerTo
             // 
