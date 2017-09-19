@@ -64,9 +64,7 @@ namespace MyHouse
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DealClient dc = new DealClient();
-            dc.Show();
-            this.Hide();
+          
         }
 
         private void button3_Click(object sender, EventArgs e)
