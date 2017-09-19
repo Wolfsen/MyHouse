@@ -106,11 +106,11 @@ namespace MyHouse
         }
         private void tbPrice_TextChanged(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(tbPrice.Text) <= 0)
-            {
-                tbPrice.Clear();
-                MessageBox.Show("Не корректный ввод цены", "Ошибка");
-            }
+         //   if (Convert.ToInt32(tbPrice.Text) <= 0)
+          //  {
+          //      tbPrice.Clear();
+      //          MessageBox.Show("Не корректный ввод цены", "Ошибка");
+         //   }
         }
 
         private int GetIdRealtor()
@@ -128,7 +128,7 @@ namespace MyHouse
         {
             cmd.Connection = _fConDb;
             _fConDb.Open();
-            cmd.CommandText = "Update Realty Set status =N'"+cbDeal.Text+"', price='"+Convert.ToInt32(tbPrice.Text)+ "'";
+            cmd.CommandText = "Update Realty Set status =N'"+cbDeal.Text+"', price='"+Convert.ToInt32(tbPrice.Text)+ "' where Id_Realty='"+idTypeRealty+"'";
             try
             {
                 cmd.ExecuteNonQuery();
