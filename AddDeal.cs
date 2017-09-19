@@ -35,6 +35,10 @@ namespace MyHouse
             butBack.Region = Button_Region;
             InitDate();
         }
+        public void SetEmail(string email)
+        {
+            this.Tag = email;
+        }
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
         {
             var diameter = radius * 2;
@@ -63,16 +67,29 @@ namespace MyHouse
         }
         public void InitDate()
         {
-            string sql = "SELECT * FROM Property_Type";
+            string sql = "SELECT * FROM Realty where status=''";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
             da.Fill(dt);
+            dt.Columns.Add("realty");
+              for(int i=0; i<dt.Rows.Count;i++)
+            {
+             dt.Rows[i][16] = (dt.Rows[i][11].ToString() +","+ dt.Rows[i][12].ToString()+","+ dt.Rows[i][13].ToString()+","+ dt.Rows[i][14].ToString());
+            }
             bs = new BindingSource();
             bs.DataSource = dt;
             cbRealty.DataSource = bs;
-            cbRealty.DisplayMember = "descriptionType";
-            cbRealty.ValueMember = "Id_PropertyType";
+
+        
+
+
+            cbRealty.DisplayMember = "realty";
+
+
+
+
+            cbRealty.ValueMember = "Id_Realty";
             _fConDb.Close();
 
             sql = "SELECT * FROM Services";
@@ -96,30 +113,63 @@ namespace MyHouse
             }
         }
 
+        private int GetIdRealtor()
+        {
+           string sql = "SELECT Id FROM Realtor where email='"+this.Tag.ToString()+"'";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            _fConDb.Close();
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        private void UppdateRealty()
+        {
+            cmd.Connection = _fConDb;
+            _fConDb.Open();
+            cmd.CommandText = "Update Realty Set status =N'"+cbDeal.Text+"', price='"+Convert.ToInt32(tbPrice.Text)+ "'";
+            try
+            {
+                cmd.ExecuteNonQuery();
+                cmd.Clone();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Ошибка:\r\n" + exc.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            finally
+            {
+                _fConDb.Close();
+            }
+        }
+
         private void butAdd_Click(object sender, EventArgs e)
         {
             if (tbPrice.Text != "")
             {
+                int idrealtor = GetIdRealtor();
                 cmd.Connection = _fConDb;
                 _fConDb.Open();
-               // cmd.CommandText = "Insert into Deal (FIO ,Passport,WhomGiven,WhenGiven,Address,IdPosition) values('" + tbFIO.Text + "','" + tbSeria.Text + "','" + tbWhom.Text + "','" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "','" + tbAddress.Text + "','" + IdPos + "')";
+                cmd.CommandText = "Insert into Deal (Id_realty,Id_realtor,Id_services,dateOfDeal) values('" + idTypeRealty + "','" + idrealtor + "','" + idDeal + "','" + dateTimePickerTo.Value.ToString("yyyy-MM-dd") + "')";
                 try
                 {
                     cmd.ExecuteNonQuery();
                     cmd.Clone();
-                }
+               }
                 catch (Exception exc)
                 {
                     MessageBox.Show("Ошибка:\r\n" + exc.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
-                finally
+              finally
                 {
                     _fConDb.Close();
                 }
+                UppdateRealty();
                 MessageBox.Show("Сделка успешно заключена!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 butAdd.Enabled = false;
-                this.Owner.Show();
                 this.Close();
             }
             else MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);

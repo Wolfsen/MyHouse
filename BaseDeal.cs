@@ -24,6 +24,12 @@ namespace MyHouse
         DataTable dt;
         SqlDataAdapter da;
         BindingSource bs;
+
+        public void SetEmail(string email)
+        {
+            this.Tag = email;
+        }
+
         private void BaseDeal_Load(object sender, EventArgs e)
         {
             butDeal.FlatAppearance.BorderSize = 0;
@@ -72,6 +78,7 @@ namespace MyHouse
         private void butDeal_Click(object sender, EventArgs e)
         {
             AddDeal ad = new AddDeal();
+            ad.SetEmail(this.Tag.ToString());
             ad.ShowDialog();
         }
         DataView dv;
@@ -110,6 +117,15 @@ namespace MyHouse
             pd.Print();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BaseDeal_Activated(object sender, EventArgs e)
+        {
+            InitDateDeal();
+        }
     }
 }
 
