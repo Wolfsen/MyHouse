@@ -44,9 +44,9 @@ namespace MyHouse
             dataGridView2.Rows[1].Height = 30;
             dataGridView2[0, 1].Value = "Пароль";
             dataGridView2[0, 1].ReadOnly = true;
-            dataGridView2[0,1].Style.Format= "";
+            dataGridView2[0, 1].Style.Format = "";
 
-           
+
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -93,6 +93,7 @@ namespace MyHouse
                     if (dt.Rows[0][1].ToString() == "1")
                     {
                         MenuClient mc = new MenuClient();
+                        mc.Usersmail.Text = dataGridView2[1, 0].Value.ToString();
                         mc.Show();
                         this.Close();
                     }
@@ -100,6 +101,7 @@ namespace MyHouse
                 if (dt.Rows[0][1].ToString() == "2")
                     {
                         MenuRealtor mc = new MenuRealtor();
+                        mc.Usersmail.Text = dataGridView2[1, 0].Value.ToString();
                         mc.Show();
                         this.Close();
                     }
@@ -107,6 +109,7 @@ namespace MyHouse
                 if (dt.Rows[0][1].ToString() == "3")
                     {
                         ManagerMenu mc = new ManagerMenu();
+                        mc.Usersmail.Text = dataGridView2[1, 0].Value.ToString();
                         mc.Show();
                         this.Close();
                     }
@@ -117,5 +120,7 @@ namespace MyHouse
             else
                 MessageBox.Show("Попробуй еще раз!", "Ошибка");
         }
+
     }
+   
 }

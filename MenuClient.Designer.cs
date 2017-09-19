@@ -34,6 +34,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.Usersmail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,6 +117,15 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Меню клиента";
             // 
+            // Usersmail
+            // 
+            this.Usersmail.AutoSize = true;
+            this.Usersmail.Location = new System.Drawing.Point(432, 9);
+            this.Usersmail.Name = "Usersmail";
+            this.Usersmail.Size = new System.Drawing.Size(0, 13);
+            this.Usersmail.TabIndex = 9;
+            this.Usersmail.Visible = false;
+            // 
             // MenuClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,6 +133,7 @@
             this.BackgroundImage = global::MyHouse.Properties.Resources.Фон;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(555, 332);
+            this.Controls.Add(this.Usersmail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button3);
@@ -147,5 +158,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label Usersmail;
     }
 }
