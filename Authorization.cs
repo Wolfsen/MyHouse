@@ -39,9 +39,11 @@ namespace MyHouse
             dataGridView2.Rows.Add();
             dataGridView2.Rows[0].Height = 30;
             dataGridView2[0, 0].Value = "Ваш E-mail";
+            dataGridView2[0, 0].ReadOnly = true;
             dataGridView2.Rows.Add();
             dataGridView2.Rows[1].Height = 30;
             dataGridView2[0, 1].Value = "Пароль";
+            dataGridView2[0, 1].ReadOnly = true;
             dataGridView2[0,1].Style.Format= "";
 
            
