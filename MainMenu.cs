@@ -17,20 +17,24 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K1FLG14\SQLEXPRESS;Initial Catalog=Database2;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(connectionString);
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
         SqlCommand cmd = new SqlCommand();
         string sql;
+        bool first;
         private void MainMenu_Load(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(59, 160, 232);
             button2.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView2.Columns[0].DefaultCellStyle.WrapMode=DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor= Color.FromArgb(59, 160, 232);
             dataGridView2.Columns[0].DefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView2.Columns[0].DefaultCellStyle.Font = new Font("Calibri", 8, FontStyle.Regular);
             dataGridView2.Columns[1].DefaultCellStyle.BackColor = Color.FromArgb(162, 136, 234);
             dataGridView1.BackgroundColor= Color.FromArgb(162, 136, 234);
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
+            textBox1.BackColor = Color.FromArgb(162, 136, 234);
+            label5.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView2.Rows.Add();
             dataGridView2.Rows[0].Height = 40;
             dataGridView2[0,0].Value = "Вид недвижимости";
@@ -46,26 +50,103 @@ namespace MyHouse
             dataGridView2.Rows.Add();
             dataGridView2.Rows[4].Height = 40;
             dataGridView2[0, 4].Value = "Этаж";
-            dataGridView2.Rows.Add();
-            dataGridView2.Rows[5].Height = 40;
-            dataGridView2[0, 5].Value = "Цена до";
+           // dataGridView2.RowsDefaultCellStyle.BackColor = Color.FromArgb(162, 136, 234);
             button1.FlatAppearance.BorderSize = 0;
             button2.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height),10));
             button1.Region = Button_Region;
             button2.Region = Button_Region;
-            FillDtgv();
+            FillDtgvFromBase();
+            FillPropertyTypeFromBase();
+            FillObjectTypeFromBase();
+            FillHouseTypeFromBase();
+            FillCount();
         }
 
-        private void FillDtgv()
+       private void  FillPropertyTypeFromBase()
         {
-            sql = "Select * from Realty";
+            sql = "Select * from Property_Type";
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             DataTable ds = new DataTable();
             connection.Open();
             dataadapter.Fill(ds);
             connection.Close();
+            for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                (dataGridView2[1, 0] as DataGridViewComboBoxCell).Items.Add(ds.Rows[i][1]);
+            }
+        }
+
+        private void FillObjectTypeFromBase()
+        {
+            sql = "Select * from Object";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dataadapter.Fill(ds);
+            connection.Close();
+            for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                (dataGridView2[1, 1] as DataGridViewComboBoxCell).Items.Add(ds.Rows[i][1]);
+            }
+        }
+
+        private void FillHouseTypeFromBase()
+        {
+            sql = "Select * from House_Type";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dataadapter.Fill(ds);
+            connection.Close();
+            for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                (dataGridView2[1, 2] as DataGridViewComboBoxCell).Items.Add(ds.Rows[i][1]);
+            }
+        }
+
+        private void FillDtgvFromBase()
+        {
+            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType)";
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dataadapter.Fill(ds);
+            connection.Close();
+            FillDgv(ds);
+        }
+
+        private void FillDgv(DataTable ds)
+        {
+            dataGridView1.Rows.Clear();
+            for(int i=0; i<ds.Rows.Count; i++)
+            {
+                dataGridView1.Rows.Add();
+                dataGridView1[0, i].Value = ds.Rows[i][1];
+                dataGridView1[1, i].Value = ds.Rows[i][2];
+                dataGridView1[2, i].Value = ds.Rows[i][3];
+                dataGridView1[3, i].Value = ds.Rows[i][4];
+                dataGridView1[4, i].Value = ds.Rows[i][5];
+                dataGridView1[5, i].Value = ds.Rows[i][6];
+                dataGridView1[5, i].Value += "," + ds.Rows[i][7];
+                dataGridView1[6, i].Value = ds.Rows[i][8];
+                dataGridView1[7, i].Value = ds.Rows[i][10] +" " + ds.Rows[i][11] + " " + ds.Rows[i][12] + " " + ds.Rows[i][13];
+                dataGridView1[8, i].Value = ds.Rows[i][9];
+            }
+        }
+
+        private void FillCount()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                (dataGridView2[1, 3] as DataGridViewComboBoxCell).Items.Add((i+1).ToString());
+            }
+
+            for (int i = 0; i < 20; i++)
+            {
+                (dataGridView2[1, 4] as DataGridViewComboBoxCell).Items.Add((i + 1).ToString());
+            }
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -105,6 +186,84 @@ namespace MyHouse
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            first = false;
+            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType)";
+
+            if ((dataGridView2[1, 0] as DataGridViewComboBoxCell).Value!=null)
+            {
+                sql += " where descriptionType=N'"+ (dataGridView2[1, 0] as DataGridViewComboBoxCell).Value.ToString()+ "'";
+                first = true;
+            }
+            if ((dataGridView2[1, 1] as DataGridViewComboBoxCell).Value != null)
+            {
+                if(first)
+                {
+                    sql += " and descriptionObject=N'" + (dataGridView2[1, 1] as DataGridViewComboBoxCell).Value.ToString() + "'";
+                }
+                else
+                {
+                    sql += " where descriptionObject=N'" + (dataGridView2[1, 1] as DataGridViewComboBoxCell).Value.ToString() + "'";
+                    first = true;
+                }
+            }
+            if ((dataGridView2[1, 2] as DataGridViewComboBoxCell).Value != null)
+            {
+                if (first)
+                {
+                    sql += " and descriptionHouse=N'" + (dataGridView2[1, 2] as DataGridViewComboBoxCell).Value.ToString() + "'";
+                }
+                else
+                {
+                    sql += " where descriptionHouse=N'" + (dataGridView2[1, 2] as DataGridViewComboBoxCell).Value.ToString() + "'";
+                    first = true;
+                }
+            }
+            if ((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value != null)
+            {
+                if (first)
+                {
+                    sql += " and numberOfRooms=N'" + Convert.ToInt32((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value) + "'";
+                }
+                else
+                {
+                    sql += " where numberOfRooms=N'" + Convert.ToInt32((dataGridView2[1, 3] as DataGridViewComboBoxCell).Value) + "'";
+                    first = true;
+                }
+            }
+            if ((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value != null)
+            {
+                if (first)
+                {
+                    sql += " and floor=N'" + Convert.ToInt32((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value) + "'";
+                }
+                else
+                {
+                    sql += " where floor=N'" + Convert.ToInt32((dataGridView2[1, 4] as DataGridViewComboBoxCell).Value) + "'";
+                    first = true;
+                }
+            }
+            if (textBox1.Text != "")
+            {
+                if (first)
+                {
+                    sql += " and price <='" + Convert.ToInt32(textBox1.Text) + "'";
+                }
+                else
+                {
+                    sql += " where price <='" + Convert.ToInt32(textBox1.Text) + "'";
+                    first = true;
+                }
+            }
+            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dataadapter.Fill(ds);
+            connection.Close();
+            FillDgv(ds);
         }
     }
 }
