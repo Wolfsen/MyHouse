@@ -78,6 +78,7 @@
             this.label2.Size = new System.Drawing.Size(269, 37);
             this.label2.TabIndex = 30;
             this.label2.Text = "Заключение сделки";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 

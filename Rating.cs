@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Drawing.Printing;
 
 namespace MyHouse
 {
@@ -16,26 +18,32 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-
+        const string _myConn = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+        //const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        SqlConnection _fConDb = new SqlConnection(_myConn);
+        SqlCommand cmd = new SqlCommand();
+        DataTable dt;
+        SqlDataAdapter da;
         private void Rating_Load(object sender, EventArgs e)
         {
-            dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
-            button1.BackColor = Color.FromArgb(59, 160, 232);
-            button2.BackColor = Color.FromArgb(59, 160, 232);
-            button3.BackColor = Color.FromArgb(59, 160, 232);
-            button4.BackColor = Color.FromArgb(59, 160, 232);
-            button1.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.BorderSize = 0;
-            button4.FlatAppearance.BorderSize = 0;
+            dgv.BackgroundColor = Color.FromArgb(162, 136, 234);
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
+            butCount.BackColor = Color.FromArgb(59, 160, 232);
+            butSum.BackColor = Color.FromArgb(59, 160, 232);
+            butBack.BackColor = Color.FromArgb(59, 160, 232);
+            butPrint.BackColor = Color.FromArgb(59, 160, 232);
+            butCount.FlatAppearance.BorderSize = 0;
+            butSum.FlatAppearance.BorderSize = 0;
+            butBack.FlatAppearance.BorderSize = 0;
+            butPrint.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
-            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height), 10));
-            button1.Region = Button_Region;
-            button2.Region = Button_Region;
-            Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button3.Width, button3.Height), 10));
-            button3.Region = Button_Region;
-            button4.Region = Button_Region;
+            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butCount.Width, butCount.Height), 10));
+            butCount.Region = Button_Region;
+            butSum.Region = Button_Region;
+            Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butBack.Width, butBack.Height), 10));
+            butBack.Region = Button_Region;
+            butPrint.Region = Button_Region;
+            InitDataDeal();
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -59,12 +67,22 @@ namespace MyHouse
             path.CloseFigure();
             return path;
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        // novik.13.03@gmail.com
+        private void butBack_Click(object sender, EventArgs e)
         {
             ManagerMenu mm = new ManagerMenu();
             mm.Show();
             this.Close();
+        }
+        public void InitDataDeal()
+        {
+            string sql = "SELECT (FirstName+' '+LastName+' '+Patronymic) as FIO, COUNT(Id_deal) as CountDeal, SUM(price) as SumDeal FROM ((Deal inner join Realty on Realty.Id_Realty=Deal.Id_realty)  inner join Realtor on Realtor.Id=Deal.Id_realtor) Group By FirstName, LastName, Patronymic";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            _fConDb.Close();
+            dgv.DataSource = dt;
         }
     }
 }

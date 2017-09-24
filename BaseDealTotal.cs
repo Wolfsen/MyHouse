@@ -12,9 +12,9 @@ using System.Drawing.Printing;
 
 namespace MyHouse
 {
-    public partial class BaseDeal : Form
+    public partial class BaseDealTotal : Form
     {
-        public BaseDeal()
+        public BaseDealTotal()
         {
             InitializeComponent();
         }
@@ -25,55 +25,18 @@ namespace MyHouse
         DataTable dt;
         SqlDataAdapter da;
         BindingSource bs;
-
-        public void SetEmail(string email)
-        {
-            this.Tag = email;
-        }
-        int flagClient = 0;
-        public int FlagClient
-        {
-            get
-            {
-                return flagClient;
-            }
-            set
-            {
-                flagClient = value;
-            }
-        }
-        public int GetEmailClient()
-        {
-            string sql = "SELECT Id_Client FROM Clients Where email='"+ this.Tag.ToString() +"'";
-            da = new SqlDataAdapter(sql, _fConDb);
-            dt = new DataTable();
-            _fConDb.Open();
-            da.Fill(dt);
-            int count = dt.Rows.Count;
-            _fConDb.Close();
-            return count;
-        }
-        private void BaseDeal_Load(object sender, EventArgs e)
+        private void BaseDealTotal_Load(object sender, EventArgs e)
         {
             dgvDeal.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
-            butDeal.FlatAppearance.BorderSize = 0;
             butFilter.FlatAppearance.BorderSize = 0;
             butPrint.FlatAppearance.BorderSize = 0;
             butBack.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
-            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butDeal.Width, butFilter.Height), 10));
-            butDeal.Region = Button_Region;
             Region Button_Region2 = new Region(RoundedRect(new Rectangle(0, 0, butPrint.Width, butPrint.Height), 10));
             butPrint.Region = Button_Region2;
             butFilter.Region = Button_Region2;
             butBack.Region = Button_Region2;
             InitDataDeal();
-            FlagClient = GetEmailClient();
-            if (FlagClient>0)
-            {
-                butDeal.Visible = false;
-                label1.Text = "Мои сделки";
-            }
 
         }
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -97,33 +60,9 @@ namespace MyHouse
             path.CloseFigure();
             return path;
         }
-
-        private void butBack_Click(object sender, EventArgs e)
-        {
-            if (FlagClient > 0)
-            {
-                MenuClient mc = new MenuClient();
-                mc.SetEmail(this.Tag.ToString());
-                mc.Show();
-                this.Close();
-            }
-            else
-            {
-                MenuRealtor mr = new MenuRealtor();
-                mr.Show();
-                this.Close();
-            }
-        }
-
-        private void butDeal_Click(object sender, EventArgs e)
-        {
-            AddDeal ad = new AddDeal();
-            ad.SetEmail(this.Tag.ToString());
-            ad.ShowDialog();
-        }
         public void InitDataDeal()
         {
-            string sql = "SELECT descriptionType, description, price, dateOfDeal, (FirstName+' '+LastName+' '+Patronymic) as FIO FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client)";
+            string sql = "SELECT descriptionType, description, price, dateOfDeal, (Realtor.FirstName+' '+Realtor.LastName+' '+Realtor.Patronymic) as FIOR, (Clients.FirstName+' '+Clients.LastName+' '+Clients.Patronymic) as FIOCl FROM (((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) inner join Realtor on Realtor.Id=Deal.Id_realtor)";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
@@ -131,11 +70,12 @@ namespace MyHouse
             _fConDb.Close();
             dgvDeal.DataSource = dt;
         }
+
         private void butFilter_Click(object sender, EventArgs e)
         {
             string dateInIsoFormat1 = dateTimePickerFrom.Value.ToString("yyyyMMdd HH:mm:ss");
             string dateInIsoFormat2 = dateTimePickerTo.Value.ToString("yyyyMMdd HH:mm:ss");
-            string sql = "SELECT descriptionType, description, price, dateOfDeal, FirstName FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) Where dateOfDeal BETWEEN '" + dateInIsoFormat1 + "' AND '" + dateInIsoFormat2 + "'";
+            string sql = "SELECT descriptionType, description, price, dateOfDeal, (Realtor.FirstName + ' ' + Realtor.LastName + ' ' + Realtor.Patronymic) as FIOR, (Clients.FirstName + ' ' + Clients.LastName + ' ' + Clients.Patronymic) as FIOCl FROM(((((Realty inner join Deal on Deal.Id_realty = Realty.Id_Realty)inner join Services on Services.Id_Services = Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType = Realty.Id_PropertyType) inner join Clients on Clients.Id_Client = Realty.client) inner join Realtor on Realtor.Id = Deal.Id_realtor) Where dateOfDeal BETWEEN '" + dateInIsoFormat1 + "' AND '" + dateInIsoFormat2 + "'";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
@@ -143,7 +83,7 @@ namespace MyHouse
             _fConDb.Close();
             dgvDeal.DataSource = dt;
         }
-
+        
         private void butPrint_Click(object sender, EventArgs e)
         {
             var pd = new PrintDocument();
@@ -156,15 +96,11 @@ namespace MyHouse
             pd.Print();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void butBack_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void BaseDeal_Activated(object sender, EventArgs e)
-        {
-            InitDataDeal();
+            ManagerMenu mm = new ManagerMenu();
+            mm.Show();
+            this.Close();
         }
     }
 }
-

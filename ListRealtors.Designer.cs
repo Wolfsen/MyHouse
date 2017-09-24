@@ -34,17 +34,18 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.butAdd = new System.Windows.Forms.Button();
+            this.butPrint = new System.Windows.Forms.Button();
+            this.butBack = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvRealtor = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRealtor)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -81,44 +82,47 @@
             this.textBox1.Size = new System.Drawing.Size(197, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Введите параметр поиска";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // button1
+            // butAdd
             // 
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(430, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 32);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.butAdd.BackColor = System.Drawing.Color.DodgerBlue;
+            this.butAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.butAdd.Location = new System.Drawing.Point(533, 120);
+            this.butAdd.Name = "butAdd";
+            this.butAdd.Size = new System.Drawing.Size(86, 32);
+            this.butAdd.TabIndex = 3;
+            this.butAdd.Text = "Добавить";
+            this.butAdd.UseVisualStyleBackColor = false;
+            this.butAdd.Click += new System.EventHandler(this.butAdd_Click);
             // 
-            // button2
+            // butPrint
             // 
-            this.button2.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(534, 119);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 32);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Печать";
-            this.button2.UseVisualStyleBackColor = false;
+            this.butPrint.BackColor = System.Drawing.Color.DodgerBlue;
+            this.butPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butPrint.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.butPrint.Location = new System.Drawing.Point(625, 120);
+            this.butPrint.Name = "butPrint";
+            this.butPrint.Size = new System.Drawing.Size(86, 32);
+            this.butPrint.TabIndex = 4;
+            this.butPrint.Text = "Печать";
+            this.butPrint.UseVisualStyleBackColor = false;
+            this.butPrint.Click += new System.EventHandler(this.butPrint_Click);
             // 
-            // button3
+            // butBack
             // 
-            this.button3.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(638, 119);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 32);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Назад";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.butBack.BackColor = System.Drawing.Color.DodgerBlue;
+            this.butBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.butBack.Location = new System.Drawing.Point(717, 120);
+            this.butBack.Name = "butBack";
+            this.butBack.Size = new System.Drawing.Size(86, 32);
+            this.butBack.TabIndex = 5;
+            this.butBack.Text = "Назад";
+            this.butBack.UseVisualStyleBackColor = false;
+            this.butBack.Click += new System.EventHandler(this.butBack_Click);
             // 
             // panel1
             // 
@@ -129,11 +133,12 @@
             this.panel1.Size = new System.Drawing.Size(181, 32);
             this.panel1.TabIndex = 7;
             // 
-            // dataGridView1
+            // dgvRealtor
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkGray;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvRealtor.AllowUserToAddRows = false;
+            this.dgvRealtor.AllowUserToResizeColumns = false;
+            this.dgvRealtor.BackgroundColor = System.Drawing.Color.DarkGray;
+            this.dgvRealtor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -141,9 +146,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeight = 30;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvRealtor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvRealtor.ColumnHeadersHeight = 30;
+            this.dgvRealtor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column4,
             this.Column5});
@@ -154,37 +159,53 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.Location = new System.Drawing.Point(235, 154);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1.Size = new System.Drawing.Size(501, 193);
-            this.dataGridView1.TabIndex = 9;
+            this.dgvRealtor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvRealtor.EnableHeadersVisualStyles = false;
+            this.dgvRealtor.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvRealtor.Location = new System.Drawing.Point(235, 154);
+            this.dgvRealtor.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvRealtor.Name = "dgvRealtor";
+            this.dgvRealtor.RowHeadersVisible = false;
+            this.dgvRealtor.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvRealtor.Size = new System.Drawing.Size(568, 193);
+            this.dgvRealtor.TabIndex = 9;
             // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "FIO";
             this.Column3.HeaderText = "Ф.И.О.";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 200;
+            this.Column3.Width = 255;
             // 
             // Column4
             // 
+            this.Column4.DataPropertyName = "email";
             this.Column4.HeaderText = "E-mail";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            this.Column4.Width = 150;
+            this.Column4.Width = 160;
             // 
             // Column5
             // 
+            this.Column5.DataPropertyName = "Telephone";
             this.Column5.HeaderText = "Телефон";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.Width = 150;
+            // 
+            // butSearch
+            // 
+            this.butSearch.BackColor = System.Drawing.Color.DodgerBlue;
+            this.butSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.butSearch.Location = new System.Drawing.Point(422, 120);
+            this.butSearch.Name = "butSearch";
+            this.butSearch.Size = new System.Drawing.Size(86, 32);
+            this.butSearch.TabIndex = 10;
+            this.butSearch.Text = "Поиск";
+            this.butSearch.UseVisualStyleBackColor = false;
+            this.butSearch.Click += new System.EventHandler(this.butSearch_Click);
             // 
             // ListRealtors
             // 
@@ -192,12 +213,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(739, 359);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(818, 359);
+            this.Controls.Add(this.butSearch);
+            this.Controls.Add(this.dgvRealtor);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.butBack);
+            this.Controls.Add(this.butPrint);
+            this.Controls.Add(this.butAdd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -205,11 +227,12 @@
             this.Name = "ListRealtors";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сотрудники";
+            this.Activated += new System.EventHandler(this.ListRealtors_Activated);
             this.Load += new System.EventHandler(this.ListRealtors_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRealtor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,13 +243,14 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button butAdd;
+        private System.Windows.Forms.Button butPrint;
+        private System.Windows.Forms.Button butBack;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvRealtor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Button butSearch;
     }
 }
