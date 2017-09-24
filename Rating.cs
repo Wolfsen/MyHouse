@@ -84,5 +84,17 @@ namespace MyHouse
             _fConDb.Close();
             dgv.DataSource = dt;
         }
+
+        private void butPrint_Click(object sender, EventArgs e)
+        {
+            var pd = new PrintDocument();
+            pd.PrintPage += (s, q) =>
+            {
+                var bmp = new Bitmap(dgv.Width, dgv.Height);
+                dgv.DrawToBitmap(bmp, dgv.ClientRectangle);
+                q.Graphics.DrawImage(bmp, new Point(100, 100));
+            };
+            pd.Print();
+        }
     }
 }
