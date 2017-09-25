@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace MyHouse
 {
@@ -16,6 +18,12 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+
+        SqlConnection connection = new SqlConnection(connectionString);
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        SqlCommand cmd = new SqlCommand();
+        string sql;
+        DataTable dt;
 
         private void AddEmployee_Load(object sender, EventArgs e)
         {
@@ -80,8 +88,65 @@ namespace MyHouse
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (dataGridView1[1, 0].Value != null && dataGridView1[1, 1].Value != null &&
+                dataGridView1[1, 2].Value != null && dataGridView1[1, 3].Value != null &&
+                dataGridView1[1, 4].Value != null)
+            {
 
-        }
+
+                Regex pass = new Regex(@"^(?=[A-Za-z0-9@%&#,.?!\/*^}{|~)(-_+$]{6,}$)(?=.*\d)(?=.*[A-Za-z])(?=.*[A-Z]).*$");
+                Regex tel = new Regex(@"^[+7]{2}\s{1}[0-9]{3}\s{1}[0-9]{3}\s{1}[0-9]{2}\s{1}[0-9]{2}$");
+                Regex mail = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$");
+              
+
+                if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false)
+                {
+                    MessageBox.Show("Пароль не отвечает требованиям");
+                    return;
+                }
+
+                if (mail.IsMatch(dataGridView1.Rows[0].Cells[1].Value.ToString()) == false)
+                {
+                    MessageBox.Show("Такой почты не существует!!!");
+                    return;
+                }
+
+                if (tel.IsMatch(dataGridView1.Rows[4].Cells[1].Value.ToString()) == false)
+                {
+                    MessageBox.Show("Неверный формат телефона");
+                    return;
+                }
+                              
+                if (dataGridView2[1, 0].Value != null && dataGridView2[1, 1].Value != null && dataGridView2[1, 0].Value.ToString() == dataGridView2[1, 1].Value.ToString())
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = connection;
+                    connection.Open();
+                    cmd.CommandText = "Insert into Realtor (email,FirstName,LastName,Patronymic,Telephone) values('" + dataGridView1[1, 0].Value.ToString() + "',N'" + dataGridView1[1, 1].Value.ToString() + "',N'" + dataGridView1[1, 2].Value.ToString() + "',N'" + dataGridView1[1, 3].Value.ToString() + "','" + dataGridView1[1, 4].Value.ToString() +  "')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                    connection.Close();
+
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1.Connection = connection;
+                    connection.Open();
+                    cmd1.CommandText = "Insert into Users (email,roleid,password) values('" + dataGridView1[1, 0].Value.ToString() + "','" + "2" + "','" + dataGridView2[1, 0].Value.ToString() + "')";
+                    cmd1.ExecuteNonQuery();
+                    cmd1.Clone();
+                    connection.Close();
+
+                    
+                    this.Close();
+
+                }
+                else
+                    MessageBox.Show("Что-то с паролем!");
+            }
+            else
+                MessageBox.Show("Заполните все поля!");
+
+        
+    }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

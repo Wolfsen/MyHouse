@@ -80,7 +80,7 @@ namespace MyHouse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dataGridView2[1, 0].Value.ToString() != null && dataGridView2[1, 1].Value.ToString() != null)
+            if (dataGridView2[1, 0].Value != null && dataGridView2[1, 1].Value != null)
             {
                 string sql = "Select * From Users Where email='" + dataGridView2[1, 0].Value.ToString() + "' and password='" + dataGridView2[1, 1].Value.ToString() + "'";
                 SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);

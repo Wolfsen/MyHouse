@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace MyHouse
 {
@@ -16,6 +18,11 @@ namespace MyHouse
         {
             InitializeComponent();
         }
+
+
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        SqlConnection connection = new SqlConnection(connectionString);
+        DataTable dt;
 
         private void ProfileClient_Load(object sender, EventArgs e)
         {
@@ -60,6 +67,8 @@ namespace MyHouse
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height), 10));
             button1.Region = Button_Region;
             button4.Region = Button_Region;
+
+            DgvAdd();
         }
 
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -89,6 +98,119 @@ namespace MyHouse
             MenuClient mc = new MenuClient();
             mc.Show();
             this.Close();
+        }
+
+        private void DgvAdd()
+        {
+            string sql = "Select * from Clients where email='" + this.Tag+"'";
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlDataAdapter dt = new SqlDataAdapter(sql, connection);
+            DataTable ds = new DataTable();
+            connection.Open();
+            dt.Fill(ds);
+            connection.Close();
+
+            for (int i = 1;i<ds.Columns.Count; i++)
+            {
+                dataGridView1.Rows[i-1].Cells[1].Value = ds.Rows[0][i];
+            }
+            label1.Tag = ds.Rows[0][0];
+            label11.Tag = ds.Rows[0][1];
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+
+            if (dataGridView1.Rows[0].Cells[1].Value != null && dataGridView1.Rows[1].Cells[1].Value != null && 
+                dataGridView1.Rows[2].Cells[1].Value != null && dataGridView1.Rows[3].Cells[1].Value != null && 
+                dataGridView1.Rows[4].Cells[1].Value != null && dataGridView1.Rows[5].Cells[1].Value != null && 
+                dataGridView1.Rows[6].Cells[1].Value != null)
+            {
+                 Regex pass = new Regex(@"^(?=[A-Za-z0-9@%&#,.?!\/*^}{|~)(-_+$]{6,}$)(?=.*\d)(?=.*[A-Za-z])(?=.*[A-Z]).*$");
+                Regex tel = new Regex(@"^[+7]{ 2 }\s{ 1}[0-9]{3}\s{1}[0-9]{3}\s{1}[0-9]{2}\s{1}[0-9]{2}$");
+
+                if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false && dataGridView2.Rows[0].Cells[1].Value != null)
+                {
+                    MessageBox.Show("Пароль не отвечает требованиям");
+                    return;
+                }
+
+                if (tel.IsMatch(dataGridView1.Rows[6].Cells[1].Value.ToString()) == false)
+                {
+                    MessageBox.Show("Неверный формат телефона");
+                    return;
+                }
+
+                DateTime dateNow = DateTime.Now;
+                DateTime clientyear = Convert.ToDateTime(dataGridView1.Rows[4].Cells[1].Value);
+                int year = dateNow.Year - clientyear.Year;
+                if (dateNow.Month < clientyear.Month ||
+                    (dateNow.Month == clientyear.Month && dateNow.Day < clientyear.Day)) year--;
+
+                if(year<18)
+                {
+                    MessageBox.Show("Клиенту не может быть меньше 18ти лет!");
+                    return;
+                }
+
+
+                if (dataGridView1.Rows[0].Cells[1].Value.ToString() != label11.Tag.ToString())
+                {
+                    MessageBox.Show("Почта не должна меняться!");
+                }
+                else if (dataGridView2.Rows[0].Cells[1].Value != null && dataGridView2.Rows[1].Cells[1].Value != null && dataGridView2.Rows[0].Cells[1].Value.ToString() == dataGridView2.Rows[1].Cells[1].Value.ToString())
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = connection;
+                    connection.Open();
+                    cmd.CommandText = "Update Clients set email=N'" + dataGridView1.Rows[0].Cells[1].Value +
+                         "',FirstName=N'" + dataGridView1.Rows[1].Cells[1].Value + "',LastName=N'"
+                         + dataGridView1.Rows[2].Cells[1].Value + "',Patronymic=N'" + dataGridView1.Rows[3].Cells[1].Value +
+                         "',DateOfBirth=N'" + dataGridView1.Rows[4].Cells[1].Value + "',Telephone=N'" +
+                         dataGridView1.Rows[5].Cells[1].Value + "',Address=N'" + dataGridView1.Rows[6].Cells[1].Value +
+                         "' Where Id_Client=N'" + Convert.ToInt32(label1.Tag) + "'";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                    connection.Close();
+
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1.Connection = connection;
+                    connection.Open();
+                    cmd1.CommandText = "Update Users set password=N'" + dataGridView2.Rows[0].Cells[1].Value +
+                         "' Where email=N'" + label11.Tag + "'";
+                    cmd1.ExecuteNonQuery();
+                    cmd1.Clone();
+                    connection.Close();
+                    MessageBox.Show("Данные профиля и пароль изменены");
+                    DgvAdd();
+
+                }
+                else if (dataGridView2.Rows[0].Cells[1].Value != null && dataGridView2.Rows[1].Cells[1].Value != null && dataGridView2.Rows[0].Cells[1].Value.ToString() != dataGridView2.Rows[1].Cells[1].Value.ToString())
+                {
+                    MessageBox.Show("Пароли не совпадают!");
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = connection;
+                    connection.Open();
+                    cmd.CommandText = "Update Clients set email=N'" + dataGridView1.Rows[0].Cells[1].Value +
+                         "',FirstName=N'" + dataGridView1.Rows[1].Cells[1].Value + "',LastName=N'"
+                         + dataGridView1.Rows[2].Cells[1].Value + "',Patronymic=N'" + dataGridView1.Rows[3].Cells[1].Value +
+                         "',DateOfBirth=N'" + dataGridView1.Rows[4].Cells[1].Value + "',Telephone=N'" +
+                         dataGridView1.Rows[5].Cells[1].Value + "',Address=N'" + dataGridView1.Rows[6].Cells[1].Value +
+                         "' Where Id_Client=N'" + Convert.ToInt32(label1.Tag) + "'";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                    connection.Close();
+                    MessageBox.Show("Данные профиля изменены");
+                    DgvAdd();
+                }
+
+            }
+
         }
     }
 }

@@ -86,6 +86,8 @@ namespace MyHouse
 
         public void LoadBaseClient()
         {
+            dataGridView1.Rows.Clear();
+
             sql = "Select * from Clients";
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             connection.Open();

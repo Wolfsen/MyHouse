@@ -74,6 +74,7 @@ namespace MyHouse
         private void button3_Click(object sender, EventArgs e)
         {
             ProfileClient pc = new ProfileClient();
+            pc.Tag = Usersmail.Text;
             pc.Show();
             this.Hide();
         }
