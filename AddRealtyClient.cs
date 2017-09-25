@@ -149,6 +149,9 @@ namespace MyHouse
                 cmd.ExecuteNonQuery();
                     cmd.Clone();
                     connection.Close();
+                MessageBox.Show("Недвижимость добавлена!");
+                dataGridView1.Rows.RemoveAt(0);
+                dataGridView1.Rows.Add();
                 foreach (Form f in Application.OpenForms)
                 {
                     if (f.Name == "RealtyClient")
@@ -157,7 +160,6 @@ namespace MyHouse
                         return;
                     }
                 }
-                MessageBox.Show("Недвижимость добавлена!");
             }
             else
                 MessageBox.Show("Заполните все поля!");
