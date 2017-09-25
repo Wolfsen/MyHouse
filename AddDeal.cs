@@ -17,7 +17,10 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-        const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+
+        //const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        const string _myConn = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+
         SqlConnection _fConDb = new SqlConnection(_myConn);
         SqlCommand cmd = new SqlCommand();
         DataTable dt;
@@ -195,6 +198,11 @@ namespace MyHouse
             {
                 idDeal = Convert.ToInt32(cbDeal.SelectedValue);
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,7 +18,8 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-        const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        const string _myConn = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+        //const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
         SqlConnection _fConDb = new SqlConnection(_myConn);
         SqlCommand cmd = new SqlCommand();
         DataTable dt;
@@ -29,7 +30,29 @@ namespace MyHouse
         {
             this.Tag = email;
         }
-
+        int flagClient = 0;
+        public int FlagClient
+        {
+            get
+            {
+                return flagClient;
+            }
+            set
+            {
+                flagClient = value;
+            }
+        }
+        public int GetEmailClient()
+        {
+            string sql = "SELECT Id_Client FROM Clients Where email='"+ this.Tag.ToString() +"'";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            int count = dt.Rows.Count;
+            _fConDb.Close();
+            return count;
+        }
         private void BaseDeal_Load(object sender, EventArgs e)
         {
             dgvDeal.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
@@ -38,13 +61,19 @@ namespace MyHouse
             butPrint.FlatAppearance.BorderSize = 0;
             butBack.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
-            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butFilter.Width, butFilter.Height), 10));
-            butFilter.Region = Button_Region;
+            Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, butDeal.Width, butFilter.Height), 10));
+            butDeal.Region = Button_Region;
             Region Button_Region2 = new Region(RoundedRect(new Rectangle(0, 0, butPrint.Width, butPrint.Height), 10));
             butPrint.Region = Button_Region2;
-            butDeal.Region = Button_Region2;
+            butFilter.Region = Button_Region2;
             butBack.Region = Button_Region2;
-            InitDateDeal();
+            InitDataDeal();
+            FlagClient = GetEmailClient();
+            if (FlagClient>0)
+            {
+                butDeal.Visible = false;
+                label1.Text = "Мои сделки";
+            }
 
         }
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
@@ -71,9 +100,19 @@ namespace MyHouse
 
         private void butBack_Click(object sender, EventArgs e)
         {
-            MenuRealtor mr = new MenuRealtor();
-            mr.Show();
-            this.Close();
+            if (FlagClient > 0)
+            {
+                MenuClient mc = new MenuClient();
+                mc.SetEmail(this.Tag.ToString());
+                mc.Show();
+                this.Close();
+            }
+            else
+            {
+                MenuRealtor mr = new MenuRealtor();
+                mr.Show();
+                this.Close();
+            }
         }
 
         private void butDeal_Click(object sender, EventArgs e)
@@ -82,10 +121,9 @@ namespace MyHouse
             ad.SetEmail(this.Tag.ToString());
             ad.ShowDialog();
         }
-        DataView dv;
-        public void InitDateDeal()
+        public void InitDataDeal()
         {
-            string sql = "SELECT descriptionType, description, price, dateOfDeal, FirstName FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client)";
+            string sql = "SELECT descriptionType, description, price, dateOfDeal, (FirstName+' '+LastName+' '+Patronymic) as FIO FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client)";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
@@ -125,7 +163,7 @@ namespace MyHouse
 
         private void BaseDeal_Activated(object sender, EventArgs e)
         {
-            InitDateDeal();
+            InitDataDeal();
         }
     }
 }

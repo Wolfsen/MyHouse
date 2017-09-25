@@ -35,6 +35,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -48,9 +51,6 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -115,6 +115,30 @@
             this.dataGridView2.Size = new System.Drawing.Size(363, 80);
             this.dataGridView2.TabIndex = 22;
             // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Вид недвижимости";
+            this.Column3.Name = "Column3";
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column3.Width = 120;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Тип объекта";
+            this.Column4.Name = "Column4";
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column4.Width = 120;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Вид объекта";
+            this.Column5.Name = "Column5";
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column5.Width = 120;
+            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DodgerBlue;
@@ -155,6 +179,7 @@
             this.button1.TabIndex = 23;
             this.button1.Text = "Фильтр";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -256,30 +281,6 @@
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Вид недвижимости";
-            this.Column3.Name = "Column3";
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column3.Width = 120;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Тип объекта";
-            this.Column4.Name = "Column4";
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column4.Width = 120;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Вид объекта";
-            this.Column5.Name = "Column5";
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column5.Width = 120;
-            // 
             // RealtyClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +298,7 @@
             this.Name = "RealtyClient";
             this.Text = "RealtyClient";
             this.Load += new System.EventHandler(this.RealtyClient_Load);
+            this.Shown += new System.EventHandler(this.RealtyClient_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

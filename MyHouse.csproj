@@ -104,6 +104,12 @@
     <Compile Include="BaseDeal.Designer.cs">
       <DependentUpon>BaseDeal.cs</DependentUpon>
     </Compile>
+    <Compile Include="BaseDealTotal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseDealTotal.Designer.cs">
+      <DependentUpon>BaseDealTotal.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseRealty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BaseDeal.resx">
       <DependentUpon>BaseDeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseDealTotal.resx">
+      <DependentUpon>BaseDealTotal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BaseRealty.resx">
       <DependentUpon>BaseRealty.cs</DependentUpon>
@@ -258,8 +267,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Database2_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database2.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\gr.png" />
     <None Include="Resources\work.png" />
