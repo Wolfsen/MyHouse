@@ -67,6 +67,7 @@ namespace MyHouse
         private void button1_Click(object sender, EventArgs e)
         {
             RealtyClient rc = new RealtyClient();
+            rc.SetEmail(Usersmail.Text);
             rc.Show();
             this.Hide();
         }

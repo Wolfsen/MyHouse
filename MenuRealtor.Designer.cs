@@ -137,7 +137,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MyHouse.Properties.Resources.Фон;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(714, 325);
+            this.ClientSize = new System.Drawing.Size(646, 325);
             this.Controls.Add(this.Usersmail);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.butDeal);
