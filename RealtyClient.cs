@@ -134,6 +134,7 @@ namespace MyHouse
             dt = new DataTable();
             dataadapter.Fill(dt);
             connection.Close();
+            (dataGridView2.Rows[0].Cells[0] as DataGridViewComboBoxCell).Items.Add("");
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 (dataGridView2.Rows[0].Cells[0] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
@@ -145,6 +146,7 @@ namespace MyHouse
             dt = new DataTable();
             dataadapter.Fill(dt);
             connection.Close();
+            (dataGridView2.Rows[0].Cells[2] as DataGridViewComboBoxCell).Items.Add("");
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 (dataGridView2.Rows[0].Cells[2] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
@@ -157,6 +159,7 @@ namespace MyHouse
             dt = new DataTable();
             dataadapter.Fill(dt);
             connection.Close();
+            (dataGridView2.Rows[0].Cells[1] as DataGridViewComboBoxCell).Items.Add("");
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 (dataGridView2.Rows[0].Cells[1] as DataGridViewComboBoxCell).Items.Add(dt.Rows[i][0]);
@@ -168,17 +171,17 @@ namespace MyHouse
         {
             sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment, FirstName from ((((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType) inner join Clients On Realty.client=Clients.Id_Client) where status=''";
 
-            if ((dataGridView2[0, 0] as DataGridViewComboBoxCell).Value != null)
+            if ((dataGridView2[0, 0] as DataGridViewComboBoxCell).Value != null && (dataGridView2[0, 0] as DataGridViewComboBoxCell).Value.ToString() != "")
             {
                 sql += " and descriptionType=N'" + (dataGridView2[0, 0] as DataGridViewComboBoxCell).Value.ToString() + "'";
             }
-            if ((dataGridView2[1, 0] as DataGridViewComboBoxCell).Value != null)
+            if ((dataGridView2[1, 0] as DataGridViewComboBoxCell).Value != null && (dataGridView2[1, 0] as DataGridViewComboBoxCell).Value.ToString() != "")
             {
 
                 sql += " and descriptionObject=N'" + (dataGridView2[1, 0] as DataGridViewComboBoxCell).Value.ToString() + "'";
 
             }
-            if ((dataGridView2[2, 0] as DataGridViewComboBoxCell).Value != null)
+            if ((dataGridView2[2, 0] as DataGridViewComboBoxCell).Value != null && (dataGridView2[2, 0] as DataGridViewComboBoxCell).Value.ToString() != "")
             {
 
                 sql += " and descriptionHouse=N'" + (dataGridView2[2, 0] as DataGridViewComboBoxCell).Value.ToString() + "'";
@@ -186,9 +189,15 @@ namespace MyHouse
             }
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             DataTable ds = new DataTable();
-            connection.Open();
-            dataadapter.Fill(ds);
+          
+                connection.Open();
+            try
+            {
+                dataadapter.Fill(ds);
+            }
+            catch { MessageBox.Show("Невозможно!"); }
             connection.Close();
+
             FillDgv(ds);
         }
 
