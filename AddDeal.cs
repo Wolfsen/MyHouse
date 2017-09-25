@@ -71,7 +71,7 @@ namespace MyHouse
         }
         public void InitDate()
         {
-            string sql = "SELECT * FROM Realty where status=''";
+            string sql = "SELECT * FROM Realty where status='' or status is NULL";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
@@ -159,7 +159,7 @@ namespace MyHouse
                     int idrealtor = GetIdRealtor();
                     cmd.Connection = _fConDb;
                     _fConDb.Open();
-                    cmd.CommandText = "Insert into Deal (Id_realty,Id_realtor,Id_services,dateOfDeal) values('" + idTypeRealty + "','" + idrealtor + "','" + idDeal + "','" + dateTimePickerTo.Value.ToString("yyyy-MM-dd") + "')";
+                    cmd.CommandText = "Insert into Deal (Id_realty,Id_realtor,Id_services,dateOfDeal) values('" + idTypeRealty + "','" + idrealtor + "','" + idDeal + "','" + dateTimePickerTo.Value.ToString("yyyyMMdd HH:mm:ss") + "')";
                     try
                     {
                         cmd.ExecuteNonQuery();

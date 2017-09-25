@@ -98,6 +98,7 @@ namespace MyHouse
         private void button1_Click(object sender, EventArgs e)
         {
             MenuClient mc = new MenuClient();
+            mc.SetEmail(this.Tag.ToString());
             mc.Show();
             this.Close();
         }

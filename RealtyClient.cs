@@ -114,6 +114,7 @@ namespace MyHouse
         private void button3_Click(object sender, EventArgs e)
         {
             MenuClient mc = new MenuClient();
+            mc.SetEmail(this.Tag.ToString());
             mc.Show();
             this.Close();
         }

@@ -53,6 +53,28 @@ namespace MyHouse
             _fConDb.Close();
             return count;
         }
+        public int GetIdClient()
+        {
+            string sql = "SELECT Id_Client FROM Clients Where email='" + this.Tag.ToString() + "'";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            int count = Convert.ToInt32(dt.Rows[0][0]);
+            _fConDb.Close();
+            return count;
+        }
+        public int GetIdRealtor()
+        {
+            string sql = "SELECT Id FROM Realtor Where email='" + this.Tag.ToString() + "'";
+            da = new SqlDataAdapter(sql, _fConDb);
+            dt = new DataTable();
+            _fConDb.Open();
+            da.Fill(dt);
+            int count = Convert.ToInt32(dt.Rows[0][0]);
+            _fConDb.Close();
+            return count;
+        }
         private void BaseDeal_Load(object sender, EventArgs e)
         {
             dgvDeal.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
@@ -67,8 +89,9 @@ namespace MyHouse
             butPrint.Region = Button_Region2;
             butFilter.Region = Button_Region2;
             butBack.Region = Button_Region2;
-            InitDataDeal();
+           
             FlagClient = GetEmailClient();
+            InitDataDeal();
             if (FlagClient>0)
             {
                 butDeal.Visible = false;
@@ -123,7 +146,17 @@ namespace MyHouse
         }
         public void InitDataDeal()
         {
-            string sql = "SELECT descriptionType, description, price, dateOfDeal, (FirstName+' '+LastName+' '+Patronymic) as FIO FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client)";
+            string sql = "";
+            if (FlagClient > 0)
+            {
+                butDeal.Visible = false;
+                label1.Text = "Мои сделки";
+
+                sql = "SELECT descriptionType, description, price, dateOfDeal, (FirstName+' '+LastName+' '+Patronymic) as FIO FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) Where Realty.client=" + GetIdClient();
+            }
+            else
+                sql = "SELECT descriptionType, description, price, dateOfDeal, (FirstName+' '+LastName+' '+Patronymic) as FIO FROM ((((Realty inner join Deal on Deal.Id_realty=Realty.Id_Realty)inner join Services on Services.Id_Services=Deal.Id_services) inner join Property_Type on Property_Type.Id_PropertyType=Realty.Id_PropertyType) inner join Clients on Clients.Id_Client=Realty.client) Where Deal.Id_realtor=" + GetIdRealtor();
+
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
             _fConDb.Open();
