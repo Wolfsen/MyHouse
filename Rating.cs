@@ -22,7 +22,7 @@ namespace MyHouse
         //const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
         SqlConnection _fConDb = new SqlConnection(_myConn);
         SqlCommand cmd = new SqlCommand();
-        DataTable dt;
+        DataTable dt, dtSearch;
         SqlDataAdapter da;
         private void Rating_Load(object sender, EventArgs e)
         {
@@ -79,8 +79,10 @@ namespace MyHouse
             string sql = "SELECT (FirstName+' '+LastName+' '+Patronymic) as FIO, COUNT(Id_deal) as CountDeal, SUM(price) as SumDeal FROM ((Deal inner join Realty on Realty.Id_Realty=Deal.Id_realty)  inner join Realtor on Realtor.Id=Deal.Id_realtor) Group By FirstName, LastName, Patronymic";
             da = new SqlDataAdapter(sql, _fConDb);
             dt = new DataTable();
+            dtSearch = new DataTable();
             _fConDb.Open();
             da.Fill(dt);
+            da.Fill(dtSearch);
             _fConDb.Close();
             dgv.DataSource = dt;
         }
@@ -95,6 +97,28 @@ namespace MyHouse
                 q.Graphics.DrawImage(bmp, new Point(100, 100));
             };
             pd.Print();
+        }
+
+        private void butCount_Click(object sender, EventArgs e)
+        {
+            DataView dataView = new DataView(dtSearch);
+            dataView.Sort = "CountDeal DESC";
+            dgv.DataSource = dataView;
+            for (int i = 0; i < dgv.RowCount; i++)
+            {
+                dgv.Rows[i].Cells[0].Value = i + 1;
+            }
+        }
+
+        private void butSum_Click(object sender, EventArgs e)
+        {
+            DataView dataView = new DataView(dtSearch);
+            dataView.Sort = "SumDeal DESC";
+            dgv.DataSource = dataView;
+            for (int i = 0; i < dgv.RowCount; i++)
+            {
+                dgv.Rows[i].Cells[0].Value = i + 1;
+            }
         }
     }
 }

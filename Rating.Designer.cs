@@ -83,6 +83,7 @@
             this.butCount.TabIndex = 6;
             this.butCount.Text = "Ранг по количеству сделок";
             this.butCount.UseVisualStyleBackColor = false;
+            this.butCount.Click += new System.EventHandler(this.butCount_Click);
             // 
             // butSum
             // 
@@ -96,6 +97,7 @@
             this.butSum.TabIndex = 7;
             this.butSum.Text = "Ранг по сумме сделок";
             this.butSum.UseVisualStyleBackColor = false;
+            this.butSum.Click += new System.EventHandler(this.butSum_Click);
             // 
             // butBack
             // 
