@@ -18,7 +18,10 @@ namespace MyHouse
         {
             InitializeComponent();
         }
-        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+
+        //static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+
         SqlConnection connection = new SqlConnection(connectionString);
         DataTable dt;
         Assoc propertyType = new Assoc();
@@ -148,7 +151,9 @@ namespace MyHouse
                     cmd.CommandText = "Insert into Realty (Id_PropertyType, Id_Object, Id_houseType, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, client) values('" + propertyType[(dataGridView1[0, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + objectType[(dataGridView1[2, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + houseType[(dataGridView1[1, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + Convert.ToInt32((dataGridView1[0, 0] as DataGridViewComboBoxCell).Value) + "','" + Convert.ToInt32(dataGridView1[4, 0].Value) + "','" + Convert.ToInt32(floor[0]) + "','" + Convert.ToInt32(floor[1]) + "','" + Convert.ToInt32(dataGridView1[6, 0].Value) + "',N'" + dataGridView1[8, 0].Value.ToString() + "',N'" + address[0] + "',N'" + address[1] + "','" + Convert.ToInt32(address[2]) + "','" + Convert.ToInt32(ds.Rows[0][0]) + "')";
                 cmd.ExecuteNonQuery();
                     cmd.Clone();
-                    connection.Close();
+                
+                connection.Close();
+                MessageBox.Show("Недвижимость добавлена!");
                 foreach (Form f in Application.OpenForms)
                 {
                     if (f.Name == "RealtyClient")
@@ -157,7 +162,7 @@ namespace MyHouse
                         return;
                     }
                 }
-                MessageBox.Show("Недвижимость добавлена!");
+                
             }
             else
                 MessageBox.Show("Заполните все поля!");

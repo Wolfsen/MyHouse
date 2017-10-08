@@ -20,7 +20,9 @@ namespace MyHouse
         }
 
         SqlConnection connection = new SqlConnection(connectionString);
-        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        //static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
+        static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+
         SqlCommand cmd = new SqlCommand();
         string sql;
         DataTable dt;

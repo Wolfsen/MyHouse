@@ -20,7 +20,9 @@ namespace MyHouse
         }
 
 
-        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        //static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+        static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+
         SqlConnection connection = new SqlConnection(connectionString);
         DataTable dt;
 
@@ -96,6 +98,7 @@ namespace MyHouse
         private void button1_Click(object sender, EventArgs e)
         {
             MenuClient mc = new MenuClient();
+            mc.SetEmail(this.Tag.ToString());
             mc.Show();
             this.Close();
         }
