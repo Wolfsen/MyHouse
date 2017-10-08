@@ -140,7 +140,7 @@ namespace MyHouse
 
                 }
                 else
-                    MessageBox.Show("Что-то с паролем!");
+                    MessageBox.Show("Пароли не совпадают!");
             }
             else
                 MessageBox.Show("Заполните все поля!");
