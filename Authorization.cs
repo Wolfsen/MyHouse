@@ -18,8 +18,8 @@ namespace MyHouse
             InitializeComponent();
         }
 
-        //static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
-        static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+       static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
+       // static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
 
         SqlConnection connection = new SqlConnection(connectionString);
         DataTable dt;
@@ -123,6 +123,13 @@ namespace MyHouse
                 MessageBox.Show("Попробуй еще раз!", "Ошибка");
         }
 
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == 1 && e.ColumnIndex == 1 && e.Value != null)
+            {
+                e.Value = new String('*', e.Value.ToString().Length);
+            }
+        }
     }
    
 }

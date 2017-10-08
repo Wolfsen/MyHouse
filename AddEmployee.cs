@@ -159,5 +159,13 @@ namespace MyHouse
         {
             this.Close();
         }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.Value != null)
+            {
+                e.Value = new String('*', e.Value.ToString().Length);
+            }
+        }
     }
 }
