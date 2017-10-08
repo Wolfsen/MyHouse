@@ -137,12 +137,16 @@ namespace MyHouse
                 if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false && dataGridView2.Rows[0].Cells[1].Value != null)
                 {
                     MessageBox.Show("Пароль не отвечает требованиям");
+                    MessageBox.Show("Требования\n" + "1)Минимум 6 символов\n" + "2)Минимум одна заглавная буква\n" + "3)Минимум одна цифра\n" + "4)Хотя бы один символ");
+
                     return;
                 }
 
                 if (tel.IsMatch(dataGridView1.Rows[6].Cells[1].Value.ToString()) == false)
                 {
                     MessageBox.Show("Неверный формат телефона");
+                    MessageBox.Show("Верный формат: +7 XXX XXX XX XX");
+
                     return;
                 }
 
