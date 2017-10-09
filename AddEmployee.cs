@@ -104,6 +104,7 @@ namespace MyHouse
                 if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false)
                 {
                     MessageBox.Show("Пароль не отвечает требованиям");
+                    MessageBox.Show("Требования\n"+"1)Минимум 6 символов\n"+"2)Минимум одна заглавная буква\n"+"3)Минимум одна цифра\n"+"4)Хотя бы один символ");
                     return;
                 }
 
@@ -116,6 +117,7 @@ namespace MyHouse
                 if (tel.IsMatch(dataGridView1.Rows[4].Cells[1].Value.ToString()) == false)
                 {
                     MessageBox.Show("Неверный формат телефона");
+                    MessageBox.Show("Верный формат: +7 XXX XXX XX XX");
                     return;
                 }
                               
@@ -142,7 +144,7 @@ namespace MyHouse
 
                 }
                 else
-                    MessageBox.Show("Что-то с паролем!");
+                    MessageBox.Show("Пароли не совпадают!");
             }
             else
                 MessageBox.Show("Заполните все поля!");
@@ -158,6 +160,14 @@ namespace MyHouse
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.Value != null)
+            {
+                e.Value = new String('*', e.Value.ToString().Length);
+            }
         }
     }
 }
