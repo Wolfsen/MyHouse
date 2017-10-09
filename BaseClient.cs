@@ -141,5 +141,73 @@ namespace MyHouse
         {
             LoadBaseClient();
         }
+        DataRowCollection allRows;
+        DataRow[] searchedRows;
+        private void butSearch_Click(object sender, EventArgs e)
+        {
+            if (searchedRows != null)
+                for (int i = 0; i < searchedRows.Length; i++)
+                {
+                    dataGridView1.Rows[allRows.IndexOf(searchedRows[i])].DefaultCellStyle.BackColor = Color.White;
+
+                }
+            string selectStringFIO = "FIO Like '%" + textBox1.Text.Trim() + "%'";
+            string selectStringEmail = "email Like '%" + textBox1.Text.Trim() + "%'";
+            string selectStringPhone = "Telephone Like '%" + textBox1.Text.Trim() + "%'";
+            string selectStringAddress = "Address Like '%" + textBox1.Text.Trim() + "%'";
+            allRows = ((DataTable)dataGridView1.DataSource).Rows;
+
+            searchedRows = ((DataTable)dataGridView1.DataSource).Select(selectStringFIO);
+            if (searchedRows.Length == 0)
+            {
+                searchedRows = ((DataTable)dataGridView1.DataSource).Select(selectStringEmail);
+                if (searchedRows.Length == 0)
+                {
+                    searchedRows = ((DataTable)dataGridView1.DataSource).Select(selectStringPhone);
+                    if (searchedRows.Length == 0)
+                    {
+                        searchedRows = ((DataTable)dataGridView1.DataSource).Select(selectStringAddress);
+                    }
+                }
+            }
+            if (searchedRows.Length > 0)
+            {
+                int rowIndex = allRows.IndexOf(searchedRows[0]);
+
+                dataGridView1.CurrentCell = dataGridView1[0, rowIndex];
+                for (int i = 0; i < searchedRows.Length; i++)
+                {
+                    dataGridView1.Rows[allRows.IndexOf(searchedRows[i])].DefaultCellStyle.BackColor = Color.Blue;
+
+                }
+                this.Activated -= new EventHandler(BaseClient_Activated);
+            }
+            else
+            {
+                textBox1.Clear();
+                MessageBox.Show("Ничего не найдено по запросу!");
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                if (searchedRows != null)
+                    for (int i = 0; i < searchedRows.Length; i++)
+                    {
+                        dataGridView1.Rows[allRows.IndexOf(searchedRows[i])].DefaultCellStyle.BackColor = Color.White;
+
+                    }
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                butSearch_Click(sender, e);
+            }
+        }
     }
 }

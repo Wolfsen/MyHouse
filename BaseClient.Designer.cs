@@ -32,10 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,6 +39,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.butSearch = new System.Windows.Forms.Button();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -59,6 +60,8 @@
             this.textBox1.Size = new System.Drawing.Size(197, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Введите параметр поиска";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // dataGridView1
             // 
@@ -97,34 +100,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(614, 193);
             this.dataGridView1.TabIndex = 16;
             // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Ф.И.О.";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 160;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "E-mail";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 150;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Телефон";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 150;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Адрес";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 160;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
@@ -139,9 +114,9 @@
             this.button3.BackColor = System.Drawing.Color.DodgerBlue;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(722, 97);
+            this.button3.Location = new System.Drawing.Point(754, 97);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 32);
+            this.button3.Size = new System.Drawing.Size(66, 32);
             this.button3.TabIndex = 14;
             this.button3.Text = "Назад";
             this.button3.UseVisualStyleBackColor = false;
@@ -152,9 +127,9 @@
             this.button2.BackColor = System.Drawing.Color.DodgerBlue;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(618, 97);
+            this.button2.Location = new System.Drawing.Point(668, 97);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 32);
+            this.button2.Size = new System.Drawing.Size(80, 32);
             this.button2.TabIndex = 13;
             this.button2.Text = "Печать";
             this.button2.UseVisualStyleBackColor = false;
@@ -165,9 +140,9 @@
             this.button1.BackColor = System.Drawing.Color.DodgerBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(410, 97);
+            this.button1.Location = new System.Drawing.Point(496, 97);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 32);
+            this.button1.Size = new System.Drawing.Size(80, 32);
             this.button1.TabIndex = 12;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = false;
@@ -201,13 +176,58 @@
             this.button4.BackColor = System.Drawing.Color.DodgerBlue;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(514, 97);
+            this.button4.Location = new System.Drawing.Point(582, 97);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 32);
+            this.button4.Size = new System.Drawing.Size(80, 32);
             this.button4.TabIndex = 17;
             this.button4.Text = "Экспорт";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // butSearch
+            // 
+            this.butSearch.BackColor = System.Drawing.Color.DodgerBlue;
+            this.butSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.butSearch.Location = new System.Drawing.Point(393, 97);
+            this.butSearch.Name = "butSearch";
+            this.butSearch.Size = new System.Drawing.Size(80, 32);
+            this.butSearch.TabIndex = 18;
+            this.butSearch.Text = "Поиск";
+            this.butSearch.UseVisualStyleBackColor = false;
+            this.butSearch.Click += new System.EventHandler(this.butSearch_Click);
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "FIO";
+            this.Column3.HeaderText = "Ф.И.О.";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 160;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "email";
+            this.Column4.HeaderText = "E-mail";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 150;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Telephone";
+            this.Column5.HeaderText = "Телефон";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 150;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Address";
+            this.Column1.HeaderText = "Адрес";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 160;
             // 
             // BaseClient
             // 
@@ -216,6 +236,7 @@
             this.BackgroundImage = global::MyHouse.Properties.Resources.Фон;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(826, 333);
+            this.Controls.Add(this.butSearch);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
@@ -244,10 +265,6 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
@@ -255,5 +272,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button butSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

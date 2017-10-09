@@ -180,7 +180,7 @@ namespace MyHouse
                     this.Close();
                 }
             }
-            else MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else MessageBox.Show("Заполните все поля!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 

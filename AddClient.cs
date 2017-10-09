@@ -111,20 +111,20 @@ namespace MyHouse
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (dataGridView1[1, 0].Value!= null && dataGridView1[1, 1].Value != null &&
+            if (dataGridView1[1, 0].Value != null && dataGridView1[1, 1].Value != null &&
                 dataGridView1[1, 2].Value != null && dataGridView1[1, 3].Value != null &&
                 dataGridView1[1, 4].Value != null && dataGridView1[1, 5].Value != null &&
                 dataGridView1[1, 6].Value != null)
             {
 
-           
+
                 Regex pass = new Regex(@"^(?=[A-Za-z0-9@%&#,.?!\/*^}{|~)(-_+$]{6,}$)(?=.*\d)(?=.*[A-Za-z])(?=.*[A-Z]).*$");
                 Regex tel = new Regex(@"^[+7]{2}\s{1}[0-9]{3}\s{1}[0-9]{3}\s{1}[0-9]{2}\s{1}[0-9]{2}$");
                 Regex mail = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$");
                 DateTime dateNow = DateTime.Now;
                 DateTime clientyear = Convert.ToDateTime(dataGridView1.Rows[4].Cells[1].Value);
 
-                if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false )
+                if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false)
                 {
                     MessageBox.Show("Пароль не отвечает требованиям");
                     return;
@@ -165,19 +165,19 @@ namespace MyHouse
                     SqlCommand cmd1 = new SqlCommand();
                     cmd1.Connection = connection;
                     connection.Open();
-                    cmd1.CommandText = "Insert into Users (email,roleid,password) values('" + dataGridView1[1, 0].Value.ToString() + "','" +"1"+ "','" + dataGridView2[1, 0].Value.ToString() + "')";
+                    cmd1.CommandText = "Insert into Users (email,roleid,password) values('" + dataGridView1[1, 0].Value.ToString() + "','" + "1" + "','" + dataGridView2[1, 0].Value.ToString() + "')";
                     cmd1.ExecuteNonQuery();
                     cmd1.Clone();
                     connection.Close();
 
                     BaseClient bc = new BaseClient();
-                    bc.LoadBaseClient();                                                 
+                    bc.LoadBaseClient();
                     this.Close();
-                    
+
                 }
                 else
                     MessageBox.Show("Что-то с паролем!");
-                        }
+            }
             else
                 MessageBox.Show("Заполните все поля!");
 
