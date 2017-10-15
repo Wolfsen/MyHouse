@@ -147,12 +147,13 @@ namespace MyHouse
 
         private void butAdd_Click(object sender, EventArgs e)
         {
-            if (tbPrice.Text != "")
+            int n;
+            if (tbPrice.Text != ""&& int.TryParse(tbPrice.Text, out n))
             {
-                if (Convert.ToInt32(tbPrice.Text) <= 0)
+                if (Convert.ToInt32(tbPrice.Text) <= 0 && int.TryParse(tbPrice.Text, out n))
                 {
                     tbPrice.Clear();
-                    MessageBox.Show("Не корректный ввод цены", "Ошибка");
+                    MessageBox.Show("Не корректный ввод стоимости!", "Ошибка");
                 }
                 else
                 {

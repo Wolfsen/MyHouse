@@ -230,7 +230,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "AddRealtyClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddRealtyClient";
+            this.Text = "Добавление недвижимости";
             this.Load += new System.EventHandler(this.AddRealtyClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

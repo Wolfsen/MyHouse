@@ -142,7 +142,7 @@
             this.Controls.Add(this.button1);
             this.Name = "MenuClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuClient";
+            this.Text = "Меню клиента";
             this.Load += new System.EventHandler(this.MenuClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

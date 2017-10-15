@@ -32,6 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,10 +44,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.butSearch = new System.Windows.Forms.Button();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -99,6 +99,38 @@
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView1.Size = new System.Drawing.Size(614, 193);
             this.dataGridView1.TabIndex = 16;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "FIO";
+            this.Column3.HeaderText = "Ф.И.О.";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 160;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "email";
+            this.Column4.HeaderText = "E-mail";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 150;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Telephone";
+            this.Column5.HeaderText = "Телефон";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 150;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Address";
+            this.Column1.HeaderText = "Адрес";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 160;
             // 
             // panel1
             // 
@@ -197,38 +229,6 @@
             this.butSearch.UseVisualStyleBackColor = false;
             this.butSearch.Click += new System.EventHandler(this.butSearch_Click);
             // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "FIO";
-            this.Column3.HeaderText = "Ф.И.О.";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 160;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "email";
-            this.Column4.HeaderText = "E-mail";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 150;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Telephone";
-            this.Column5.HeaderText = "Телефон";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 150;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Address";
-            this.Column1.HeaderText = "Адрес";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 160;
-            // 
             // BaseClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -249,7 +249,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BaseClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BaseClient";
+            this.Text = "База клиентов";
             this.Activated += new System.EventHandler(this.BaseClient_Activated);
             this.Load += new System.EventHandler(this.BaseClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

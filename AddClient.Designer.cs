@@ -206,7 +206,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddClient";
+            this.Text = "Добавление клиента";
             this.Load += new System.EventHandler(this.AddClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

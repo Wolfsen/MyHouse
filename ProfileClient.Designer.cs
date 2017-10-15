@@ -209,7 +209,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProfileClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ProfileClient";
+            this.Text = "Мой профиль";
             this.Load += new System.EventHandler(this.ProfileClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

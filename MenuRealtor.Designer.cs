@@ -147,7 +147,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MenuRealtor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuRealtor";
+            this.Text = "Меню риелтора";
             this.Load += new System.EventHandler(this.MenuRealtor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -233,7 +233,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddDeal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddDeal";
+            this.Text = "Заключение сделки";
             this.Load += new System.EventHandler(this.AddDeal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

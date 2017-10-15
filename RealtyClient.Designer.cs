@@ -296,7 +296,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "RealtyClient";
-            this.Text = "RealtyClient";
+            this.Text = "Моя недвижимость";
             this.Load += new System.EventHandler(this.RealtyClient_Load);
             this.Shown += new System.EventHandler(this.RealtyClient_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
