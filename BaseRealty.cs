@@ -58,7 +58,10 @@ namespace MyHouse
             mr.Show();
             this.Close();
         }
-
+        public void SetEmail(string email)
+        {
+            this.Tag = email;
+        }
         private void BaseRealty_Load(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(59, 160, 232);

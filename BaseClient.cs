@@ -34,23 +34,29 @@ namespace MyHouse
             button2.BackColor = Color.FromArgb(59, 160, 232);
             button3.BackColor = Color.FromArgb(59, 160, 232);
             button4.BackColor = Color.FromArgb(59, 160, 232);
+            butSearch.BackColor= Color.FromArgb(59, 160, 232);
             button1.FlatAppearance.BorderSize = 0;
             button2.FlatAppearance.BorderSize = 0;
             button3.FlatAppearance.BorderSize = 0;
             button4.FlatAppearance.BorderSize = 0;
+            butSearch.FlatAppearance.BorderSize = 0;
             GraphicsPath Button_Path = new GraphicsPath();
             Region Button_Region = new Region(RoundedRect(new Rectangle(0, 0, button1.Width, button1.Height), 10));
             button1.Region = Button_Region;
             button2.Region = Button_Region;
             button3.Region = Button_Region;
             button4.Region = Button_Region;
+            butSearch.Region = Button_Region;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(59, 160, 232);
             dataGridView1.BackgroundColor = Color.FromArgb(162, 136, 234);
 
             LoadBaseClient();
 
         }
-
+        public void SetEmail(string email)
+        {
+            this.Tag = email;
+        }
         public static GraphicsPath RoundedRect(Rectangle baseRect, int radius)
         {
             var diameter = radius * 2;

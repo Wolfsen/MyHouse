@@ -64,6 +64,7 @@ namespace MyHouse
         private void butClients_Click(object sender, EventArgs e)
         {
             BaseClient bc = new BaseClient();
+            bc.SetEmail(Usersmail.Text);
             bc.Show();
             this.Hide();
         }
@@ -71,6 +72,7 @@ namespace MyHouse
         private void butRealty_Click(object sender, EventArgs e)
         {
             BaseRealty br = new BaseRealty();
+            br.SetEmail(Usersmail.Text);
             br.Show();
             this.Hide();
         }
