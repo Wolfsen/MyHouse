@@ -122,6 +122,12 @@ namespace MyHouse
 
         }
 
+        public bool PassVerif(string password)
+        {
+            Regex pass = new Regex(@"^(?=[A-Za-z0-9@%&#,.?!\/*^}{|~)(-_+$]{6,}$)(?=.*\d)(?=.*[A-Za-z])(?=.*[A-Z]).*$");
+            return pass.IsMatch(password);
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
 
@@ -134,7 +140,7 @@ namespace MyHouse
                  Regex pass = new Regex(@"^(?=[A-Za-z0-9@%&#,.?!\/*^}{|~)(-_+$]{6,}$)(?=.*\d)(?=.*[A-Za-z])(?=.*[A-Z]).*$");
                 Regex tel = new Regex(@"^[+7]{ 2 }\s{ 1}[0-9]{3}\s{1}[0-9]{3}\s{1}[0-9]{2}\s{1}[0-9]{2}$");
 
-                if (pass.IsMatch(dataGridView2.Rows[0].Cells[1].Value.ToString()) == false && dataGridView2.Rows[0].Cells[1].Value != null)
+                if (PassVerif(dataGridView2.Rows[0].Cells[1].Value.ToString()))
                 {
                     MessageBox.Show("Пароль не отвечает требованиям");
                     MessageBox.Show("Требования\n" + "1)Минимум 6 символов\n" + "2)Минимум одна заглавная буква\n" + "3)Минимум одна цифра\n" + "4)Хотя бы один символ");

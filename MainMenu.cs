@@ -195,7 +195,7 @@ namespace MyHouse
         private void button2_Click(object sender, EventArgs e)
         {
 
-            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType) where status=''";
+            sql = "Select Id_Realty, descriptionType, descriptionObject, descriptionHouse, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment from (((Realty inner join Property_Type On Realty.Id_PropertyType=Property_Type.Id_PropertyType) inner join Object On Realty.Id_Object=Object.Id_Object) inner join House_Type On Realty.Id_houseType=House_Type.Id_houseType) where (status='' OR status is NULL)";
 
             if ((dataGridView2[1, 0] as DataGridViewComboBoxCell).Value!=null)
             {

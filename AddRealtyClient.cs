@@ -148,7 +148,15 @@ namespace MyHouse
                     if(address.Length==4)
                     cmd.CommandText = "Insert into Realty (Id_PropertyType, Id_Object, Id_houseType, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, apartment, client) values('" + propertyType[(dataGridView1[0, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + objectType[(dataGridView1[2, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + houseType[(dataGridView1[1, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + Convert.ToInt32((dataGridView1[3, 0] as DataGridViewComboBoxCell).Value) + "','" + Convert.ToInt32(dataGridView1[4, 0].Value)+ "','" + Convert.ToInt32(floor[0]) + "','" + Convert.ToInt32(floor[1]) + "','" + Convert.ToInt32(dataGridView1[6,0].Value) + "',N'" + dataGridView1[8, 0].Value.ToString() + "',N'" + address[0] + "',N'" + address[1] + "','" + Convert.ToInt32(address[2]) + "','" + Convert.ToInt32(address[3]) + "','" + Convert.ToInt32(ds.Rows[0][0]) + "')";
                     else
-                    cmd.CommandText = "Insert into Realty (Id_PropertyType, Id_Object, Id_houseType, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, client) values('" + propertyType[(dataGridView1[0, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + objectType[(dataGridView1[2, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + houseType[(dataGridView1[1, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" + Convert.ToInt32((dataGridView1[0, 0] as DataGridViewComboBoxCell).Value) + "','" + Convert.ToInt32(dataGridView1[4, 0].Value) + "','" + Convert.ToInt32(floor[0]) + "','" + Convert.ToInt32(floor[1]) + "','" + Convert.ToInt32(dataGridView1[6, 0].Value) + "',N'" + dataGridView1[8, 0].Value.ToString() + "',N'" + address[0] + "',N'" + address[1] + "','" + Convert.ToInt32(address[2]) + "','" + Convert.ToInt32(ds.Rows[0][0]) + "')";
+                    cmd.CommandText = @"Insert into Realty (Id_PropertyType, Id_Object, Id_houseType, numberOfRooms, totalArea, floor, floors, price, descript, city, street, numberHouse, client) 
+                    values('" + propertyType[(dataGridView1[0, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','"
+                    + objectType[(dataGridView1[2, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" 
+                    + houseType[(dataGridView1[1, 0] as DataGridViewComboBoxCell).Value.ToString()] + "','" 
+                    + Convert.ToInt32((dataGridView1[3, 0] as DataGridViewComboBoxCell).Value) + "','"
+                    + Convert.ToInt32(dataGridView1[4, 0].Value) + "','" + Convert.ToInt32(floor[0]) + "','" 
+                    + Convert.ToInt32(floor[1]) + "','" + Convert.ToInt32(dataGridView1[6, 0].Value) + "',N'" 
+                    + dataGridView1[8, 0].Value.ToString() + "',N'" + address[0] + "',N'" + address[1] + "','" 
+                    + Convert.ToInt32(address[2]) + "','" + Convert.ToInt32(ds.Rows[0][0]) + "')";
                 cmd.ExecuteNonQuery();
                     cmd.Clone();
                 

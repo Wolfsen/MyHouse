@@ -94,17 +94,17 @@ namespace MyHouse
 
         public void LoadBaseClient()
         {
-            dataGridView1.Rows.Clear();
+            //dataGridView1.Rows.Clear();
 
-            sql = "Select * from Clients";
+            sql = "Select (FirstName+' '+LastName+' '+Patronymic) as FIO, email, Telephone, Address from Clients";
             SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
             connection.Open();
             dt = new DataTable();
             dataadapter.Fill(dt);
             connection.Close();
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-                dataGridView1.Rows.Add(dt.Rows[i][2]+" "+ dt.Rows[i][3]+" "+ dt.Rows[i][4], dt.Rows[i][1], dt.Rows[i][6], dt.Rows[i][7]);
+            dataGridView1.DataSource = dt;
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //    dataGridView1.Rows.Add(dt.Rows[i][2]+" "+ dt.Rows[i][3]+" "+ dt.Rows[i][4], dt.Rows[i][1], dt.Rows[i][6], dt.Rows[i][7]);
         }
 
         private void button4_Click(object sender, EventArgs e)
