@@ -18,7 +18,10 @@ namespace MyHouse
             InitializeComponent();
         }
         //static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True;";
-        static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+        // static string connectionString = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+
+        static string name = Environment.MachineName;
+        static string connectionString = "Data Source=" + name + "\\SQLEXPRESS;Initial Catalog=MyHouse;Integrated Security=True";
 
         SqlConnection connection = new SqlConnection(connectionString);
         DataTable dt;

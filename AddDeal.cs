@@ -19,7 +19,9 @@ namespace MyHouse
         }
 
         //const string _myConn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database2.mdf;Integrated Security = True";
-        const string _myConn = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+        // const string _myConn = "Data Source=HOUMPC\\HOUMPC;Initial Catalog=MyHouse;Integrated Security=SSPI";
+        static string name = Environment.MachineName;
+        static string _myConn = "Data Source=" + name + "\\SQLEXPRESS;Initial Catalog=MyHouse;Integrated Security=True";
 
         SqlConnection _fConDb = new SqlConnection(_myConn);
         SqlCommand cmd = new SqlCommand();
